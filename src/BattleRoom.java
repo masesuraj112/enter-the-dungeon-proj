@@ -55,7 +55,9 @@ public class BattleRoom {
                             secondaryDoor = new Door(IOUtils.parseCoords(propertyValue), coordinates[2], this);
                             break;
                         case "keyBulletKin":
-                            keyBulletKin = new KeyBulletKin(IOUtils.parseCoords(propertyValue));
+                            // issue is here
+//                            keyBulletKin = new KeyBulletKin(IOUtils.parseCoords(propertyValue));
+                            keyBulletKin = new KeyBulletKin(IOUtils.parseInitialMultipleCoords(propertyValue));
                             break;
                         case "wall":
                             Wall wall = new Wall(IOUtils.parseCoords(coords));

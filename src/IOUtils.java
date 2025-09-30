@@ -27,6 +27,20 @@ public class IOUtils {
 
     public static Point parseCoords(String coords) {
         String[] coordinates = coords.split(",");
+
         return new Point(Double.parseDouble(coordinates[0]), Double.parseDouble(coordinates[1]));
+    }
+
+    public static Point parseInitialMultipleCoords(String coords) {
+        String[] pairs= coords.split(";");
+        for (String pair: pairs) {
+            String[] numbers = pair.split(",");
+            double firstNum = Double.parseDouble(numbers[0]);
+            double secondNum = Double.parseDouble(numbers[1]);
+            return new Point(firstNum, secondNum);
+        }
+
+        return new Point(1, 2);
+
     }
 }
