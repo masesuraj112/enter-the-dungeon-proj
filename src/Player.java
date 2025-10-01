@@ -12,6 +12,9 @@ public class Player {
     private double health;
     private double speed;
     private double coins = 0;
+    private double keys = 0;
+    private double weapon = 0;
+
     private boolean faceLeft = false;
 
     private static final Image RIGHT_IMAGE = new Image("res/player_right.png");
@@ -61,7 +64,7 @@ public class Player {
     public void draw() {
         currImage = faceLeft ? LEFT_IMAGE : RIGHT_IMAGE; // NOTE: this is an example of using the ternary operator
         currImage.draw(position.x, position.y);
-        UserInterface.drawStats(health, coins);
+        UserInterface.drawStats(health, coins, keys, weapon);
     }
 
     public void earnCoins(double coins) {
