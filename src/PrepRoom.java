@@ -53,10 +53,22 @@ public class PrepRoom {
             player.draw();
         }
 
-        // door unlock mechanism
+
         if (input.wasPressed(Keys.R) && !findDoor().isUnlocked()) {
             findDoor().unlock(false);
+            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth());
+
         }
+        if (input.wasPressed(Keys.R)) {
+            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth());
+
+        }
+
+        if (input.wasPressed(Keys.M)) {
+            player = new Marine(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth());
+        }
+
+
     }
 
     private boolean stopUpdatingEarlyIfNeeded() {

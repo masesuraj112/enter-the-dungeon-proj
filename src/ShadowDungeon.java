@@ -100,6 +100,8 @@ public class ShadowDungeon extends AbstractGame {
                 player.move(nextDoor.getPosition().x, nextDoor.getPosition().y);
                 prepRoom.setPlayer(player);
 
+
+
                 return;
             case BATTLE_ROOM_A_NAME:
                 nextDoor = battleRoomA.findDoorByDestination(currRoomName);

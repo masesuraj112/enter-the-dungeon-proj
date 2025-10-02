@@ -14,6 +14,7 @@ public class Player {
     private double coins = 0;
     private double keys = 0;
     private double weapon = 0;
+    public static String chosenCharacter;
 
     private boolean faceLeft = false;
 
@@ -25,7 +26,24 @@ public class Player {
         this.currImage = RIGHT_IMAGE;
         this.speed = Double.parseDouble(ShadowDungeon.getGameProps().getProperty("movingSpeed"));
         this.health = Double.parseDouble(ShadowDungeon.getGameProps().getProperty("initialHealth"));
+        this.chosenCharacter = "null";
+
     }
+
+    public Player(Point position, String image, double speed, double health) {
+        this.position = position;
+        this.currImage = new Image(image);
+        this.speed = speed;
+        this.health = health;
+    }
+
+    public Player() {
+//        this.currImage = new Image("res/player_right.png");
+
+//        System.out.println("Inside no-arg constructor");
+    }
+
+
 
     public void update(Input input) {
         // check movement keys and mouse cursor
@@ -81,12 +99,103 @@ public class Player {
     public Point getPosition() {
         return position;
     }
+    public double getSpeed() {
+        return speed;
+    }
+    public double getHealth() {
+        return health;
+    }
+    public double getWeapon() {
+        return weapon;
+    }
+    public double getKeys() {
+        return keys;
+    }
+    public double getCoins() {
+        return coins;
+    }
+    public boolean getFaceLeft() {return faceLeft;}
 
     public Image getCurrImage() {
         return currImage;
     }
 
+    public String getChosenCharacter() {return chosenCharacter;}
+
+    public void setChosenCharacter(String character) {
+        System.out.println("i am setting");
+        this.chosenCharacter = character;
+        System.out.println(this.chosenCharacter);
+    }
+
+
     public Point getPrevPosition() {
         return prevPosition;
     }
+    public Point getCurrPosition() { return position;}
+
+    public void  setImage(String image) {
+        this.currImage = new Image(image);
+    }
+}
+
+
+class mainCharacter extends Player {
+
+
+}
+
+class Robot extends Player {
+
+
+    public Robot(Point position, String image, double speed, double health) {
+        super(position, image, speed, health);
+        super.setChosenCharacter("robot");
+
+
+
+
+    }
+
+    @Override
+    public void draw() {
+        if (getFaceLeft()) {
+            setImage("res/robot_left.png");
+        } else {
+            setImage("res/robot_right.png");
+
+        }
+
+        getCurrImage().draw(getCurrPosition().x, getCurrPosition().y);
+        UserInterface.drawStats(getHealth(), getCoins(), getKeys(), getWeapon());
+    }
+
+}
+
+class Marine extends Player {
+
+    public Marine(Point position, String image, double speed, double health) {
+        super(position, image, speed, health);
+        super.setChosenCharacter("marine");
+
+        System.out.print(getChosenCharacter());
+        System.out.print(" printing while switching inside Marine");
+        System.out.print("/n");
+
+    }
+
+    @Override
+    public void draw() {
+        if (getFaceLeft()) {
+            setImage("res/marine_left.png");
+        } else {
+            setImage("res/marine_right.png");
+
+        }
+        getCurrImage().draw(getCurrPosition().x, getCurrPosition().y);
+        UserInterface.drawStats(getHealth(), getCoins(), getKeys(), getWeapon());
+    }
+
+
+
 }

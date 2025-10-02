@@ -81,6 +81,7 @@ public class BattleRoom {
 
     public void update(Input input) {
         // update and draw all active game objects in this room
+
         primaryDoor.update(player);
         primaryDoor.draw();
         if (stopUpdatingEarlyIfNeeded()) {
@@ -118,6 +119,15 @@ public class BattleRoom {
         if (player != null) {
             player.update(input);
             player.draw();
+        }
+        System.out.println(player.getChosenCharacter());
+
+        if (player.getChosenCharacter().equals("marine")) {
+            System.out.println("mmm");
+            player = new Marine(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth());
+        } else if (player.getChosenCharacter().equals("robot")) {
+            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth());
+
         }
 
         if (noMoreEnemies() && !isComplete()) {
