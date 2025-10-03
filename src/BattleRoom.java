@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * Room with doors that are locked until the plaer defeats all enemies
+ * Room with doors that are locked until the player defeats all enemies
  */
 public class BattleRoom {
     private Player player;
@@ -120,13 +120,12 @@ public class BattleRoom {
             player.update(input);
             player.draw();
         }
-        System.out.println(player.getChosenCharacter());
 
         if (player.getChosenCharacter().equals("marine")) {
-            System.out.println("mmm");
-            player = new Marine(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth());
+            player = new Marine(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
+
         } else if (player.getChosenCharacter().equals("robot")) {
-            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth());
+            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
 
         }
 

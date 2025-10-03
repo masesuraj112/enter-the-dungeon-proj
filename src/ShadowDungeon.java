@@ -54,6 +54,7 @@ public class ShadowDungeon extends AbstractGame {
 
         ShadowDungeon.player = new Player(IOUtils.parseCoords(gameProps.getProperty("player.start")));
         prepRoom.setPlayer(player);
+
     }
 
     /**
@@ -67,12 +68,14 @@ public class ShadowDungeon extends AbstractGame {
         }
 
         background.draw((double) Window.getWidth() / 2, (double) Window.getHeight() / 2);
+        changePlayer(player);
 
         switch (currRoomName) {
             case PREP_ROOM_NAME:
                 prepRoom.update(input);
                 return;
             case BATTLE_ROOM_A_NAME:
+                player.clearBulletArray();
                 battleRoomA.update(input);
                 return;
             case BATTLE_ROOM_B_NAME:
@@ -81,6 +84,17 @@ public class ShadowDungeon extends AbstractGame {
             default:
                 endRoom.update(input);
         }
+    }
+
+    public static Player changePlayer(Player player) {
+        if (player.getChosenCharacter().equals("marine")) {
+            return new Marine(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
+//
+        } else if (player.getChosenCharacter().equals("robot")) {
+            return new Robot(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
+//
+        }
+        return player;
     }
 
     public static void changeRoom(String roomName) {

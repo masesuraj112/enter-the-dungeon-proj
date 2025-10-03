@@ -1,5 +1,6 @@
 import bagel.Input;
 import bagel.Keys;
+import bagel.util.Point;
 
 import java.util.Map;
 import java.util.Properties;
@@ -56,16 +57,17 @@ public class PrepRoom {
 
         if (input.wasPressed(Keys.R) && !findDoor().isUnlocked()) {
             findDoor().unlock(false);
-            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth());
+//            Player(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys)
+            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
 
         }
         if (input.wasPressed(Keys.R)) {
-            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth());
+            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
 
         }
 
         if (input.wasPressed(Keys.M)) {
-            player = new Marine(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth());
+            player = new Marine(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
         }
 
 

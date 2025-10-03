@@ -2,6 +2,8 @@ import bagel.*;
 import bagel.util.Point;
 import bagel.util.Rectangle;
 
+import java.util.ArrayList;
+
 /**
  * Player character that can move around and between rooms, defeat enemies, collect coins
  */
@@ -14,6 +16,8 @@ public class Player {
     private double coins = 0;
     private double keys = 0;
     private double weapon = 0;
+    private ArrayList<Bullet> bulletArrayList;
+
     public static String chosenCharacter;
 
     private boolean faceLeft = false;
@@ -27,14 +31,21 @@ public class Player {
         this.speed = Double.parseDouble(ShadowDungeon.getGameProps().getProperty("movingSpeed"));
         this.health = Double.parseDouble(ShadowDungeon.getGameProps().getProperty("initialHealth"));
         this.chosenCharacter = "null";
+        this.bulletArrayList = new ArrayList<>();
+
 
     }
 
-    public Player(Point position, String image, double speed, double health) {
+    public Player(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys) {
         this.position = position;
         this.currImage = new Image(image);
         this.speed = speed;
         this.health = health;
+        this.prevPosition = prevPosition;
+        this.coins = coins;
+        this.keys = keys;
+        this.bulletArrayList = new ArrayList<>();
+
     }
 
     public Player() {
@@ -72,6 +83,42 @@ public class Player {
         if (topLeft.x >= 0 && bottomRight.x <= Window.getWidth() && topLeft.y >= 0 && bottomRight.y <= Window.getHeight()) {
             move(currX, currY);
         }
+        System.out.println("before mouse condition");
+        System.out.println(chosenCharacter);
+        System.out.println(wasAnyMousePressed(input));
+
+
+        if ((chosenCharacter.equals("robot") || chosenCharacter.equals("marine")) && wasAnyMousePressed(input)) {
+            System.out.println("shoot bullet");
+//            sampleBullet.setPresent(true);
+            Bullet newBullet = new Bullet(getPosition(), input);
+            this.bulletArrayList.add(newBullet);
+        }
+
+        if (this.bulletArrayList.size() > 0) {
+            System.out.println("not null");
+            for (Bullet bullet: bulletArrayList) {
+                System.out.println("inside for loop");
+                bullet.setPresent(true);
+                bullet.update();
+                Point drawPos = bullet.getDrawPosition();
+                bullet.getBulletImage().draw(drawPos.x, drawPos.y);
+            }
+
+        }
+
+
+
+    }
+
+    public void clearBulletArray() {
+        for (Bullet bullet: bulletArrayList) {
+            bulletArrayList.remove(bullet);
+        }
+    }
+
+    public boolean wasAnyMousePressed(Input input) {
+        return input.wasPressed(MouseButtons.LEFT) ||  input.wasPressed(MouseButtons.MIDDLE) || input.wasPressed(MouseButtons.RIGHT);
     }
     
     public void move(double x, double y) {
@@ -147,9 +194,9 @@ class mainCharacter extends Player {
 
 class Robot extends Player {
 
-
-    public Robot(Point position, String image, double speed, double health) {
-        super(position, image, speed, health);
+//    Player(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys)
+    public Robot(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys) {
+        super(position, image, speed, health, coins, prevPosition, keys);
         super.setChosenCharacter("robot");
 
 
@@ -173,14 +220,11 @@ class Robot extends Player {
 }
 
 class Marine extends Player {
-
-    public Marine(Point position, String image, double speed, double health) {
-        super(position, image, speed, health);
+//    Player(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys)
+    public Marine(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys) {
+        super(position, image, speed, health, coins, prevPosition, keys);
         super.setChosenCharacter("marine");
 
-        System.out.print(getChosenCharacter());
-        System.out.print(" printing while switching inside Marine");
-        System.out.print("/n");
 
     }
 
