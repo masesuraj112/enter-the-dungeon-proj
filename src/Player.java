@@ -18,7 +18,7 @@ public class Player {
     private double weapon = 0;
     private ArrayList<Bullet> bulletArrayList;
 
-    public static String chosenCharacter;
+//    public static String chosenCharacter;
 
     private boolean faceLeft = false;
 
@@ -30,7 +30,8 @@ public class Player {
         this.currImage = RIGHT_IMAGE;
         this.speed = Double.parseDouble(ShadowDungeon.getGameProps().getProperty("movingSpeed"));
         this.health = Double.parseDouble(ShadowDungeon.getGameProps().getProperty("initialHealth"));
-        this.chosenCharacter = "null";
+//        this.chosenCharacter = "null";
+        ShadowDungeon.chosenCharacter = "null";
         this.bulletArrayList = new ArrayList<>();
 
 
@@ -84,11 +85,10 @@ public class Player {
             move(currX, currY);
         }
         System.out.println("before mouse condition");
-        System.out.println(chosenCharacter);
         System.out.println(wasAnyMousePressed(input));
 
 
-        if ((chosenCharacter.equals("robot") || chosenCharacter.equals("marine")) && wasAnyMousePressed(input)) {
+        if ((ShadowDungeon.chosenCharacter.equals("robot") || ShadowDungeon.chosenCharacter.equals("marine")) && wasAnyMousePressed(input)) {
             System.out.println("shoot bullet");
 //            sampleBullet.setPresent(true);
             Bullet newBullet = new Bullet(getPosition(), input);
@@ -167,13 +167,13 @@ public class Player {
         return currImage;
     }
 
-    public String getChosenCharacter() {return chosenCharacter;}
+//    public String getChosenCharacter() {return chosenCharacter;}
 
-    public void setChosenCharacter(String character) {
-        System.out.println("i am setting");
-        this.chosenCharacter = character;
-        System.out.println(this.chosenCharacter);
-    }
+//    public void setChosenCharacter(String character) {
+//        System.out.println("i am setting");
+//        this.chosenCharacter = character;
+//        System.out.println(this.chosenCharacter);
+//    }
 
 
     public Point getPrevPosition() {
@@ -197,7 +197,7 @@ class Robot extends Player {
 //    Player(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys)
     public Robot(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys) {
         super(position, image, speed, health, coins, prevPosition, keys);
-        super.setChosenCharacter("robot");
+//        super.setChosenCharacter("robot");
 
 
 
@@ -223,7 +223,7 @@ class Marine extends Player {
 //    Player(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys)
     public Marine(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys) {
         super(position, image, speed, health, coins, prevPosition, keys);
-        super.setChosenCharacter("marine");
+//        super.setChosenCharacter("marine");
 
 
     }

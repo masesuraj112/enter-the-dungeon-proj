@@ -25,6 +25,8 @@ public class ShadowDungeon extends AbstractGame {
     public static final String BATTLE_ROOM_B_NAME = "B";
     public static final String END_ROOM_NAME = "end";
 
+    public static String chosenCharacter = "none";
+
     public ShadowDungeon(Properties gameProps, Properties messageProps) {
         super(Integer.parseInt(gameProps.getProperty("window.width")),
                 Integer.parseInt(gameProps.getProperty("window.height")),
@@ -53,6 +55,7 @@ public class ShadowDungeon extends AbstractGame {
         currRoomName = PREP_ROOM_NAME;
 
         ShadowDungeon.player = new Player(IOUtils.parseCoords(gameProps.getProperty("player.start")));
+        chosenCharacter = "none";
         prepRoom.setPlayer(player);
 
     }
@@ -68,14 +71,21 @@ public class ShadowDungeon extends AbstractGame {
         }
 
         background.draw((double) Window.getWidth() / 2, (double) Window.getHeight() / 2);
-        changePlayer(player);
+        System.out.println(chosenCharacter);
+//
+//        if (chosenCharacter.equals("marine")) {
+//            player = new Marine(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
+//        }
+//        if (chosenCharacter.equals("robot")) {
+//            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
+//        }
+//        changePlayer(player);
 
         switch (currRoomName) {
             case PREP_ROOM_NAME:
                 prepRoom.update(input);
                 return;
             case BATTLE_ROOM_A_NAME:
-                player.clearBulletArray();
                 battleRoomA.update(input);
                 return;
             case BATTLE_ROOM_B_NAME:
@@ -86,11 +96,11 @@ public class ShadowDungeon extends AbstractGame {
         }
     }
 
-    public static Player changePlayer(Player player) {
-        if (player.getChosenCharacter().equals("marine")) {
+    public static Player changePlayer(String chosenCharacter) {
+        if (chosenCharacter.equals("marine")) {
             return new Marine(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
 //
-        } else if (player.getChosenCharacter().equals("robot")) {
+        } else if (chosenCharacter.equals("robot")) {
             return new Robot(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
 //
         }
@@ -196,6 +206,13 @@ public class ShadowDungeon extends AbstractGame {
         endRoom.setPlayer(player);
     }
 
+    public static void setPlayer(Player player) {
+        ShadowDungeon.player = player;
+    }
+
+    public static Player getPlayer() {
+        return player;
+    }
 
     public static Properties getGameProps() {
         return gameProps;

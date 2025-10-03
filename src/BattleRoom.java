@@ -121,13 +121,13 @@ public class BattleRoom {
             player.draw();
         }
 
-        if (player.getChosenCharacter().equals("marine")) {
-            player = new Marine(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
-
-        } else if (player.getChosenCharacter().equals("robot")) {
-            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
-
-        }
+//        if (player.getChosenCharacter().equals("marine")) {
+//            player = new Marine(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
+//
+//        } else if (player.getChosenCharacter().equals("robot")) {
+//            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
+//
+//        }
 
         if (noMoreEnemies() && !isComplete()) {
             setComplete(true);

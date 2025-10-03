@@ -62,12 +62,24 @@ public class PrepRoom {
 
         }
         if (input.wasPressed(Keys.R)) {
-            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
+            ShadowDungeon.chosenCharacter = "robot";
+            Player newPlayer = ShadowDungeon.changePlayer("robot");
+            ShadowDungeon.setPlayer(newPlayer);
+            setPlayer(newPlayer);
+//            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
 
         }
 
         if (input.wasPressed(Keys.M)) {
-            player = new Marine(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
+            ShadowDungeon.chosenCharacter = "marine";
+            Player newPlayer = ShadowDungeon.changePlayer("marine");
+            ShadowDungeon.setPlayer(newPlayer);
+            setPlayer(newPlayer);
+
+
+
+
+//            player = new Marine(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
         }
 
 
