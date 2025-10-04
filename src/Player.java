@@ -55,6 +55,11 @@ public class Player {
 //        System.out.println("Inside no-arg constructor");
     }
 
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
+
 
 
     public void update(Input input) {
@@ -84,21 +89,15 @@ public class Player {
         if (topLeft.x >= 0 && bottomRight.x <= Window.getWidth() && topLeft.y >= 0 && bottomRight.y <= Window.getHeight()) {
             move(currX, currY);
         }
-        System.out.println("before mouse condition");
-        System.out.println(wasAnyMousePressed(input));
 
 
         if ((ShadowDungeon.chosenCharacter.equals("robot") || ShadowDungeon.chosenCharacter.equals("marine")) && wasAnyMousePressed(input)) {
-            System.out.println("shoot bullet");
-//            sampleBullet.setPresent(true);
             Bullet newBullet = new Bullet(getPosition(), input);
             this.bulletArrayList.add(newBullet);
         }
 
         if (this.bulletArrayList.size() > 0) {
-            System.out.println("not null");
             for (Bullet bullet: bulletArrayList) {
-                System.out.println("inside for loop");
                 bullet.setPresent(true);
                 bullet.update();
                 Point drawPos = bullet.getDrawPosition();
@@ -106,6 +105,8 @@ public class Player {
             }
 
         }
+
+
 
 
 
@@ -167,13 +168,7 @@ public class Player {
         return currImage;
     }
 
-//    public String getChosenCharacter() {return chosenCharacter;}
 
-//    public void setChosenCharacter(String character) {
-//        System.out.println("i am setting");
-//        this.chosenCharacter = character;
-//        System.out.println(this.chosenCharacter);
-//    }
 
 
     public Point getPrevPosition() {
@@ -220,10 +215,8 @@ class Robot extends Player {
 }
 
 class Marine extends Player {
-//    Player(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys)
     public Marine(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys) {
         super(position, image, speed, health, coins, prevPosition, keys);
-//        super.setChosenCharacter("marine");
 
 
     }

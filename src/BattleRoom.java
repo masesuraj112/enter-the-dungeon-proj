@@ -12,6 +12,7 @@ public class BattleRoom {
     private Door primaryDoor;
     private Door secondaryDoor;
     private KeyBulletKin keyBulletKin;
+    private NewKeyBulletKin newKeyBulletKin;
     private ArrayList<TreasureBox> treasureBoxes;
     private ArrayList<Wall> walls;
     private ArrayList<River> rivers;
@@ -55,9 +56,11 @@ public class BattleRoom {
                             secondaryDoor = new Door(IOUtils.parseCoords(propertyValue), coordinates[2], this);
                             break;
                         case "keyBulletKin":
-                            // issue is here
-//                            keyBulletKin = new KeyBulletKin(IOUtils.parseCoords(propertyValue));
+                            // remove later
                             keyBulletKin = new KeyBulletKin(IOUtils.parseInitialMultipleCoords(propertyValue));
+                            newKeyBulletKin = new NewKeyBulletKin(IOUtils.parseMultipleCoords(propertyValue));
+//                            newKeyBulletKin.update(IOUtils.parseMultipleCoords(propertyValue));
+
                             break;
                         case "wall":
                             Wall wall = new Wall(IOUtils.parseCoords(coords));
@@ -72,6 +75,7 @@ public class BattleRoom {
                             River river = new River(IOUtils.parseCoords(coords));
                             rivers.add(river);
                             break;
+
                         default:
                     }
                 }
@@ -99,6 +103,11 @@ public class BattleRoom {
             keyBulletKin.draw();
         }
 
+        newKeyBulletKin.update();
+
+
+
+
         for (Wall wall: walls) {
             wall.update(player);
             wall.draw();
@@ -121,13 +130,7 @@ public class BattleRoom {
             player.draw();
         }
 
-//        if (player.getChosenCharacter().equals("marine")) {
-//            player = new Marine(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
-//
-//        } else if (player.getChosenCharacter().equals("robot")) {
-//            player = new Robot(player.getPosition(), "res/robot.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
-//
-//        }
+
 
         if (noMoreEnemies() && !isComplete()) {
             setComplete(true);
@@ -176,6 +179,8 @@ public class BattleRoom {
     public void activateEnemies() {
         keyBulletKin.setActive(true);
     }
+
+    // include all enemies
 
     public boolean noMoreEnemies() {
         return keyBulletKin.isDead();

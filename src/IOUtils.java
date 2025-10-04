@@ -43,4 +43,18 @@ public class IOUtils {
         return new Point(1, 2);
 
     }
+    public static ArrayList<Point> parseMultipleCoords(String coords) {
+        String[] pairs= coords.split(";");
+        ArrayList<Point> points = new ArrayList<>();
+        for (String pair: pairs) {
+            String[] numbers = pair.split(",");
+            double firstNum = Double.parseDouble(numbers[0]);
+            double secondNum = Double.parseDouble(numbers[1]);
+            points.add(new Point(firstNum, secondNum));
+
+        }
+
+        return points;
+
+    }
 }
