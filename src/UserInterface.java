@@ -13,11 +13,11 @@ public class UserInterface {
                 IOUtils.parseCoords(ShadowDungeon.getGameProps().getProperty("healthStat")));
         drawData(String.format("%s %.0f", ShadowDungeon.getMessageProps().getProperty("coinDisplay"), coins), fontSize,
                 IOUtils.parseCoords(ShadowDungeon.getGameProps().getProperty("coinStat")));
-        drawData(String.format("%s %.0f", ShadowDungeon.getMessageProps().getProperty("keyDisplay"), coins), fontSize,
+        drawData(String.format("%s %.0f", ShadowDungeon.getMessageProps().getProperty("keyDisplay"), keys), fontSize,
                 IOUtils.parseCoords(ShadowDungeon.getGameProps().getProperty("keyStat")));
-        drawData(String.format("%s %.0f", ShadowDungeon.getMessageProps().getProperty("keyDisplay"), coins), fontSize,
-                IOUtils.parseCoords(ShadowDungeon.getGameProps().getProperty("keyStat")));
-        drawData(String.format("%s %.0f", ShadowDungeon.getMessageProps().getProperty("weaponDisplay"), coins), fontSize,
+//        drawData(String.format("%s %.0f", ShadowDungeon.getMessageProps().getProperty("keyDisplay"), coins), fontSize,
+//                IOUtils.parseCoords(ShadowDungeon.getGameProps().getProperty("keyStat")));
+        drawData(String.format("%s %.0f", ShadowDungeon.getMessageProps().getProperty("weaponDisplay"), weapon), fontSize,
                 IOUtils.parseCoords(ShadowDungeon.getGameProps().getProperty("weaponStat")));
 
     }

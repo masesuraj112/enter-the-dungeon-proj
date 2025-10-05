@@ -61,6 +61,9 @@ public class Player {
 
 
 
+    public ArrayList<Bullet> getBulletArrayList() {
+        return bulletArrayList;
+    }
 
     public void update(Input input) {
         // check movement keys and mouse cursor
@@ -91,6 +94,7 @@ public class Player {
         }
 
 
+
         if ((ShadowDungeon.chosenCharacter.equals("robot") || ShadowDungeon.chosenCharacter.equals("marine")) && wasAnyMousePressed(input)) {
             Bullet newBullet = new Bullet(getPosition(), input);
             this.bulletArrayList.add(newBullet);
@@ -105,6 +109,7 @@ public class Player {
             }
 
         }
+
 
 
 
@@ -178,6 +183,10 @@ public class Player {
 
     public void  setImage(String image) {
         this.currImage = new Image(image);
+    }
+    public void setKeys(double numKeys) {
+        this.keys = numKeys;
+
     }
 }
 

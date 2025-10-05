@@ -1,6 +1,7 @@
 import bagel.Image;
 import bagel.util.Point;
 
+
 /**
  * Enemy that gets removed when the player overlaps with it
  */

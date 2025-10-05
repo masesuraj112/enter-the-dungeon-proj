@@ -19,9 +19,11 @@ public class TreasureBox {
     }
 
     public void update(Input input, Player player) {
-        if (hasCollidedWith(player) && input.wasPressed(Keys.K)) {
+        if (hasCollidedWith(player) && input.wasPressed(Keys.K) && player.getKeys() == 1) {
             player.earnCoins(coinValue);
+            player.setKeys(player.getKeys() - 1);
             active = false;
+
         }
     }
 

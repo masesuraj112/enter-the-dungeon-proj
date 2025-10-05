@@ -27,7 +27,7 @@ abstract public class Enemy {
     public boolean hasCollidedWith(Player player) {
         return enemyImage.getBoundingBoxAt(position).intersects(player.getCurrImage().getBoundingBoxAt(player.getPosition()));
     }
-    abstract public void update();
+    abstract public void update(Player player);
     public void setEnemyImage(Image image) {
         enemyImage = image;
     }
@@ -51,7 +51,11 @@ abstract public class Enemy {
         return position;
     }
 
-}
+    }
+
+
+
+
 
 
 
@@ -60,6 +64,7 @@ abstract public class Enemy {
 class NewKeyBulletKin extends Enemy {
     private ArrayList<Point> PointsArrayList;
     private int currentTarget;
+    private Key newKey;
 
     // for all other enemies have a start pos but not this one
     public NewKeyBulletKin(ArrayList<Point> points) {
@@ -69,18 +74,19 @@ class NewKeyBulletKin extends Enemy {
         PointsArrayList = points;
         currentTarget = 0;
         setPosition(points.get(0));
+        setActive(false);
+        this.newKey = new Key();
 
 
     }
 
    @Override
-    public void update() {
-        if (!isDead()) {
+    public void update(Player player) {
+        if (!isDead() && isActive()) {
             if (currentTarget == PointsArrayList.size()) {
                 currentTarget = 0;
             }
-            System.out.println(getPosition().x);
-            System.out.println(getPosition().y);
+
 
             Vector2 current = new Vector2(getPosition().x, getPosition().y);
             Vector2 target = new Vector2(PointsArrayList.get(currentTarget).x, PointsArrayList.get(currentTarget).y);
@@ -92,34 +98,50 @@ class NewKeyBulletKin extends Enemy {
                 currentTarget += 1;
 
             } else {
-                setPosition(current.add(direction.normalised().mul(5)).asPoint());
+                setPosition(current.add(direction.normalised().mul(4)).asPoint());
             }
 
+
+
             drawEnemy();
-
-//
         }
-//        if (hasCollidedWith(player)) {
-//           setHealth(player.getHealth() - 0.2);
-//        }
+        if (hasCollidedWith(player) && !isDead()) {
+            player.setHealth(player.getHealth() - 0.2);
+        }
 
-        if (getHealth() < 0) {
+        if (player.getBulletArrayList().size() > 0) {
+            for (Bullet bullet: player.getBulletArrayList()) {
+                if (collidedWithBullet(bullet)) {
+
+                    if (player.getWeapon() == 0) {
+                        setHealth(getHealth() - Double.parseDouble(ShadowDungeon.gameProps.getProperty("weaponStandardDamage")));
+                    }
+                }
+
+            }
+        }
+
+
+
+
+        
+
+        if (getHealth() < 0 && isActive()) {
             setDead(true);
+            newKey.setKeyPosition(getPosition());
+
+            newKey.update(player);
+
         }
     }
 
     public void drawEnemy() {
-        System.out.println("inside");
         getEnemyImage().draw(getPosition().x, getPosition().y);
     }
 
-//   for (Point point: PointsArrayList) {
-////                setPosition(new Point(point.x, point.y));
-////                System.out.println(getPosition().x);
-////                drawEnemy();
-//////                getEnemyImage().draw(point.x, point.y);
-////            }
-
+    public boolean collidedWithBullet(Bullet bullet) {
+        return getEnemyImage().getBoundingBoxAt(getPosition()).intersects(bullet.getDrawPosition());
+    }
 
 
 

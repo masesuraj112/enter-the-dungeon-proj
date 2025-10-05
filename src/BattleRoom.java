@@ -103,7 +103,9 @@ public class BattleRoom {
             keyBulletKin.draw();
         }
 
-        newKeyBulletKin.update();
+        // have a similar condition to above
+
+        newKeyBulletKin.update(player);
 
 
 
@@ -178,6 +180,7 @@ public class BattleRoom {
 
     public void activateEnemies() {
         keyBulletKin.setActive(true);
+        newKeyBulletKin.setActive(true);
     }
 
     // include all enemies
