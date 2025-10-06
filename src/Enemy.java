@@ -27,6 +27,14 @@ abstract public class Enemy {
     public boolean hasCollidedWith(Player player) {
         return enemyImage.getBoundingBoxAt(position).intersects(player.getCurrImage().getBoundingBoxAt(player.getPosition()));
     }
+
+    public void drawEnemy() {
+        getEnemyImage().draw(getPosition().x, getPosition().y);
+    }
+
+    public boolean collidedWithBullet(Bullet bullet) {
+        return getEnemyImage().getBoundingBoxAt(getPosition()).intersects(bullet.getDrawPosition());
+    }
     abstract public void update(Player player);
     public void setEnemyImage(Image image) {
         enemyImage = image;
@@ -55,18 +63,11 @@ abstract public class Enemy {
 
 
 
-
-
-
-
-
-
 class NewKeyBulletKin extends Enemy {
     private ArrayList<Point> PointsArrayList;
     private int currentTarget;
     private Key newKey;
 
-    // for all other enemies have a start pos but not this one
     public NewKeyBulletKin(ArrayList<Point> points) {
         setEnemyImage(new Image("res/key_bullet_kin.png"));
         setHealth(Double.parseDouble(ShadowDungeon.gameProps.getProperty("keyBulletKinHealth")));
@@ -76,8 +77,6 @@ class NewKeyBulletKin extends Enemy {
         setPosition(points.get(0));
         setActive(false);
         this.newKey = new Key();
-
-
     }
 
    @Override
@@ -100,9 +99,6 @@ class NewKeyBulletKin extends Enemy {
             } else {
                 setPosition(current.add(direction.normalised().mul(4)).asPoint());
             }
-
-
-
             drawEnemy();
         }
         if (hasCollidedWith(player) && !isDead()) {
@@ -120,12 +116,6 @@ class NewKeyBulletKin extends Enemy {
 
             }
         }
-
-
-
-
-        
-
         if (getHealth() < 0 && isActive()) {
             setDead(true);
             newKey.setKeyPosition(getPosition());
@@ -135,16 +125,76 @@ class NewKeyBulletKin extends Enemy {
         }
     }
 
-    public void drawEnemy() {
-        getEnemyImage().draw(getPosition().x, getPosition().y);
+
+
+}
+
+class BulletKin extends Enemy {
+    private int currentTarget;
+    private static int frameCounter;
+    private ArrayList<Fireball> fireBallArrayList;
+
+
+    public BulletKin(Point position) {
+        setEnemyImage(new Image("res/bullet_kin.png"));
+        setHealth(Double.parseDouble(ShadowDungeon.gameProps.getProperty("keyBulletKinHealth")));
+        setDead(false);
+        currentTarget = 0;
+        setPosition(position);
+        setActive(false);
+        frameCounter = 0;
+        this.fireBallArrayList = new ArrayList<>();
+
     }
 
-    public boolean collidedWithBullet(Bullet bullet) {
-        return getEnemyImage().getBoundingBoxAt(getPosition()).intersects(bullet.getDrawPosition());
-    }
+    @Override
+    public void update(Player player) {
+        if (frameCounter % Integer.parseInt(ShadowDungeon.gameProps.getProperty("bulletKinShootFrequency")) == 0 && isActive()) {
+            Fireball fireball= new Fireball(getPosition(), player.getPosition());
+            this.fireBallArrayList.add(fireball);
 
 
+        }
+//        if (frameCounter % 360 == 0) {
+//            Fireball fireball = new Fireball(getPosition(), player.getPosition());
+//            this.fireBallArrayList.add(fireball);
+//        }
+//
+//
+//        }
 
 
+            if (!isDead() && isActive()) {
+                drawEnemy();
+
+            }
+
+            if (getHealth() < 0 && isActive()) {
+                setDead(true);
+            }
+
+        if (this.fireBallArrayList.size() > 0) {
+            for (Fireball fireball1 : fireBallArrayList) {
+                fireball1.setPresent(true);
+                fireball1.update();
+                Point drawPos = fireball1.getDrawPosition();
+                fireball1.getBulletImage().draw(drawPos.x, drawPos.y);
+            }
+        }
+
+        frameCounter += 1;
+
+
+//            if (this.fireBallArrayList.size() > 0) {
+//                for (Fireball fireballs : fireBallArrayList) {
+//                    fireballs.setPresent(true);
+//                    fireballs.update();
+//                    Point drawPos = fireballs.getDrawPosition();
+//                    fireballs.getBulletImage().draw(drawPos.x, drawPos.y);
+//                }
+//
+//            }
+//            frameCounter++;
+        }
 
 }

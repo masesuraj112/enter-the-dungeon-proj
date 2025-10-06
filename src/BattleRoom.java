@@ -3,6 +3,7 @@ import bagel.Input;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Properties;
+import bagel.util.Point;
 
 /**
  * Room with doors that are locked until the player defeats all enemies
@@ -13,6 +14,7 @@ public class BattleRoom {
     private Door secondaryDoor;
     private KeyBulletKin keyBulletKin;
     private NewKeyBulletKin newKeyBulletKin;
+    private ArrayList <BulletKin> bulletKinArrayList;
     private ArrayList<TreasureBox> treasureBoxes;
     private ArrayList<Wall> walls;
     private ArrayList<River> rivers;
@@ -25,6 +27,7 @@ public class BattleRoom {
         walls = new ArrayList<>();
         rivers = new ArrayList<>();
         treasureBoxes = new ArrayList<>();
+        bulletKinArrayList = new ArrayList<>();
         this.roomName = roomName;
         this.nextRoomName = nextRoomName;
     }
@@ -62,6 +65,13 @@ public class BattleRoom {
 //                            newKeyBulletKin.update(IOUtils.parseMultipleCoords(propertyValue));
 
                             break;
+                        case "bulletKin":
+                            for (Point point: IOUtils.parseMultipleCoords(coords)) {
+                                bulletKinArrayList.add(new BulletKin(point));
+                            }
+
+                            break;
+
                         case "wall":
                             Wall wall = new Wall(IOUtils.parseCoords(coords));
                             walls.add(wall);
@@ -75,6 +85,7 @@ public class BattleRoom {
                             River river = new River(IOUtils.parseCoords(coords));
                             rivers.add(river);
                             break;
+
 
                         default:
                     }
@@ -107,6 +118,9 @@ public class BattleRoom {
 
         newKeyBulletKin.update(player);
 
+        for (int i = 0; i < bulletKinArrayList.size(); i ++) {
+            bulletKinArrayList.get(i).update(player);
+        }
 
 
 
@@ -181,6 +195,9 @@ public class BattleRoom {
     public void activateEnemies() {
         keyBulletKin.setActive(true);
         newKeyBulletKin.setActive(true);
+        for (int i = 0; i < bulletKinArrayList.size(); i ++) {
+            bulletKinArrayList.get(i).setActive(true);
+        }
     }
 
     // include all enemies

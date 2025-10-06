@@ -30,7 +30,6 @@ public class Player {
         this.currImage = RIGHT_IMAGE;
         this.speed = Double.parseDouble(ShadowDungeon.getGameProps().getProperty("movingSpeed"));
         this.health = Double.parseDouble(ShadowDungeon.getGameProps().getProperty("initialHealth"));
-//        this.chosenCharacter = "null";
         ShadowDungeon.chosenCharacter = "null";
         this.bulletArrayList = new ArrayList<>();
 
@@ -198,12 +197,8 @@ class mainCharacter extends Player {
 
 class Robot extends Player {
 
-//    Player(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys)
     public Robot(Point position, String image, double speed, double health, double coins, Point prevPosition, double keys) {
         super(position, image, speed, health, coins, prevPosition, keys);
-//        super.setChosenCharacter("robot");
-
-
 
 
     }
