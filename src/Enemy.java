@@ -137,7 +137,7 @@ class BulletKin extends Enemy {
 
     public BulletKin(Point position) {
         setEnemyImage(new Image("res/bullet_kin.png"));
-        setHealth(Double.parseDouble(ShadowDungeon.gameProps.getProperty("keyBulletKinHealth")));
+        setHealth(Double.parseDouble(ShadowDungeon.gameProps.getProperty("bulletKinHealth")));
         setDead(false);
         currentTarget = 0;
         setPosition(position);
@@ -174,19 +174,19 @@ class BulletKin extends Enemy {
             }
         }
 
+        if (player.getBulletArrayList().size() > 0) {
+            for (Bullet bullet: player.getBulletArrayList()) {
+//                return image.getBoundingBoxAt(position).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()));
+
+                if (getEnemyImage().getBoundingBoxAt(getPosition()).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()))) {
+                    setHealth(getHealth() - player.giveDamage());
+                }
+            }
+        }
+
         frameCounter += 1;
 
 
-//            if (this.fireBallArrayList.size() > 0) {
-//                for (Fireball fireballs : fireBallArrayList) {
-//                    fireballs.setPresent(true);
-//                    fireballs.update();
-//                    Point drawPos = fireballs.getDrawPosition();
-//                    fireballs.getBulletImage().draw(drawPos.x, drawPos.y);
-//                }
-//
-//            }
-//            frameCounter++;
         }
 
 }

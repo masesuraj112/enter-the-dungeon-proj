@@ -98,16 +98,11 @@ public class Player {
             Bullet newBullet = new Bullet(getPosition(), input);
             this.bulletArrayList.add(newBullet);
         }
-        System.out.println(bulletArrayList.size() + " is size");
 
         if (this.bulletArrayList.size() > 0) {
             for (Bullet bullet: bulletArrayList) {
                 bullet.update();
 
-
-
-////                Point drawPos = bullet.getDrawPosition();
-//                bullet.getBulletImage().draw(drawPos.x, drawPos.y);
             }
 
         }
@@ -147,6 +142,18 @@ public class Player {
         health -= damage;
         if (health <= 0) {
             ShadowDungeon.changeToGameOverRoom();
+        }
+    }
+
+    public int giveDamage() {
+        if (weapon == 0) {
+            return Integer.parseInt(ShadowDungeon.gameProps.getProperty("weaponStandardDamage"));
+        } else if (weapon == 1) {
+            return Integer.parseInt(ShadowDungeon.gameProps.getProperty("weaponAdvanceDamage"));
+
+        } else {
+            return Integer.parseInt(ShadowDungeon.gameProps.getProperty("weaponEliteDamage"));
+
         }
     }
 
