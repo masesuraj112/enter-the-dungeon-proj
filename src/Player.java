@@ -98,13 +98,16 @@ public class Player {
             Bullet newBullet = new Bullet(getPosition(), input);
             this.bulletArrayList.add(newBullet);
         }
+        System.out.println(bulletArrayList.size() + " is size");
 
         if (this.bulletArrayList.size() > 0) {
             for (Bullet bullet: bulletArrayList) {
-                bullet.setPresent(true);
                 bullet.update();
-                Point drawPos = bullet.getDrawPosition();
-                bullet.getBulletImage().draw(drawPos.x, drawPos.y);
+
+
+
+////                Point drawPos = bullet.getDrawPosition();
+//                bullet.getBulletImage().draw(drawPos.x, drawPos.y);
             }
 
         }
@@ -116,10 +119,9 @@ public class Player {
 
     }
 
-    public void clearBulletArray() {
-        for (Bullet bullet: bulletArrayList) {
-            bulletArrayList.remove(bullet);
-        }
+    public void clearBulletArray(Bullet bullet) {
+        bulletArrayList.remove(bullet);
+
     }
 
     public boolean wasAnyMousePressed(Input input) {

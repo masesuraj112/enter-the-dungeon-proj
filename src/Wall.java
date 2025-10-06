@@ -18,6 +18,15 @@ public class Wall {
             // set the player to its position prior to attempting to move through this wall
             player.move(player.getPrevPosition().x, player.getPrevPosition().y);
         }
+        if (player.getBulletArrayList().size() > 0) {
+            for (Bullet bullet: player.getBulletArrayList()) {
+                if (hasCollidedWithBullet(bullet)) {
+                    System.out.println("collision");
+                    bullet.setPresent(false);
+
+                }
+            }
+        }
     }
 
     public void draw() {
@@ -27,4 +36,10 @@ public class Wall {
     public boolean hasCollidedWith(Player player) {
         return image.getBoundingBoxAt(position).intersects(player.getCurrImage().getBoundingBoxAt(player.getPosition()));
     }
+
+    public boolean hasCollidedWithBullet(Bullet bullet) {
+        return image.getBoundingBoxAt(position).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()));
+    }
+
+
 }

@@ -11,6 +11,7 @@ public class Bullet {
         this.position = new Vector2(position.x, position.y);
         Vector2 target = new Vector2(input.getMouseX(), input.getMouseY());
         this.direction = target.sub(this.position).normalised();
+        setPresent(true);
 
     }
 
@@ -20,15 +21,29 @@ public class Bullet {
 
     public void update() {
         position = position.add(direction.mul(5));
+        if (this.isPresent) {
+            System.out.println(isPresent + " is bullet");
+            draw();
+        }
+
+
+
     }
 
+
+
+
     public void setPresent(boolean present) {
-        isPresent = present;
+        this.isPresent = present;
     }
 
     public Image getBulletImage() {
         return bulletImage;
     }
+    private void draw() {
+        bulletImage.draw(position.x, position.y);
+    }
+
 
     public Point getDrawPosition() {
         return position.asPoint();

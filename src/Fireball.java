@@ -19,7 +19,7 @@ public class Fireball {
     }
 
     public void update() {
-        position = position.add(direction.mul(2));
+        position = position.add(direction.mul(4));
     }
 
     public void setPresent(boolean present) {

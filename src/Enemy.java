@@ -155,14 +155,6 @@ class BulletKin extends Enemy {
 
 
         }
-//        if (frameCounter % 360 == 0) {
-//            Fireball fireball = new Fireball(getPosition(), player.getPosition());
-//            this.fireBallArrayList.add(fireball);
-//        }
-//
-//
-//        }
-
 
             if (!isDead() && isActive()) {
                 drawEnemy();
