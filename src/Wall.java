@@ -21,12 +21,13 @@ public class Wall {
         if (player.getBulletArrayList().size() > 0) {
             for (Bullet bullet: player.getBulletArrayList()) {
                 if (hasCollidedWithBullet(bullet)) {
-                    System.out.println("collision");
                     bullet.setPresent(false);
 
                 }
             }
         }
+
+
     }
 
     public void draw() {
@@ -40,6 +41,11 @@ public class Wall {
     public boolean hasCollidedWithBullet(Bullet bullet) {
         return image.getBoundingBoxAt(position).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()));
     }
+
+    public boolean hasCollidedWithFireball(Fireball fireball) {
+        return image.getBoundingBoxAt(position).intersects(fireball.getFireballImage().getBoundingBoxAt(fireball.getDrawPosition()));
+    }
+
 
 
 }

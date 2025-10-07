@@ -26,6 +26,7 @@ public class ShadowDungeon extends AbstractGame {
     public static final String END_ROOM_NAME = "end";
 
     public static String chosenCharacter = "none";
+    public static int frameCounter;
 
     public ShadowDungeon(Properties gameProps, Properties messageProps) {
         super(Integer.parseInt(gameProps.getProperty("window.width")),
@@ -37,6 +38,7 @@ public class ShadowDungeon extends AbstractGame {
         screenWidth = Integer.parseInt(gameProps.getProperty("window.width"));
         screenHeight = Integer.parseInt(gameProps.getProperty("window.height"));
         this.background = new Image("res/background.png");
+        frameCounter = 0;
 
         resetGameState(gameProps);
     }
@@ -57,6 +59,7 @@ public class ShadowDungeon extends AbstractGame {
         ShadowDungeon.player = new Player(IOUtils.parseCoords(gameProps.getProperty("player.start")));
         chosenCharacter = "none";
         prepRoom.setPlayer(player);
+        frameCounter = 0;
 
     }
 
@@ -69,6 +72,7 @@ public class ShadowDungeon extends AbstractGame {
         if (input.wasPressed(Keys.ESCAPE)) {
             Window.close();
         }
+        frameCounter += 1;
 
         background.draw((double) Window.getWidth() / 2, (double) Window.getHeight() / 2);
 
@@ -86,6 +90,7 @@ public class ShadowDungeon extends AbstractGame {
             default:
                 endRoom.update(input);
         }
+
     }
 
     public static Player changePlayer(String chosenCharacter) {

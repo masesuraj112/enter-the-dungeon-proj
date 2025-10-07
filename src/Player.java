@@ -138,9 +138,11 @@ public class Player {
         this.coins += coins;
     }
 
+
     public void receiveDamage(double damage) {
         health -= damage;
         if (health <= 0) {
+            System.out.println("change room");
             ShadowDungeon.changeToGameOverRoom();
         }
     }

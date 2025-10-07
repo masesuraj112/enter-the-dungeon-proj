@@ -69,7 +69,6 @@ public class BattleRoom {
                             for (Point point: IOUtils.parseMultipleCoords(coords)) {
                                 bulletKinArrayList.add(new BulletKin(point));
                             }
-
                             break;
 
                         case "wall":
@@ -114,9 +113,10 @@ public class BattleRoom {
             keyBulletKin.draw();
         }
 
-        // have a similar condition to above
 
         newKeyBulletKin.update(player);
+
+
 
         for (int i = 0; i < bulletKinArrayList.size(); i ++) {
             bulletKinArrayList.get(i).update(player);
@@ -127,6 +127,13 @@ public class BattleRoom {
         for (Wall wall: walls) {
             wall.update(player);
             wall.draw();
+            for (int i = 0; i < bulletKinArrayList.size(); i ++) {
+                bulletKinArrayList.get(i).collideWithWall(wall);
+
+            }
+
+
+
         }
 
         for (River river: rivers) {

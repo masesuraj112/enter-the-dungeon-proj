@@ -11,6 +11,8 @@ abstract public class Enemy {
     private boolean dead = false;
     private Point position;
 
+
+
     public void draw() {
         enemyImage.draw(position.x, position.y);
     }
@@ -131,8 +133,8 @@ class NewKeyBulletKin extends Enemy {
 
 class BulletKin extends Enemy {
     private int currentTarget;
-    private static int frameCounter;
     private ArrayList<Fireball> fireBallArrayList;
+    public static int frameCounter;
 
 
     public BulletKin(Point position) {
@@ -149,12 +151,18 @@ class BulletKin extends Enemy {
 
     @Override
     public void update(Player player) {
-        if (frameCounter % Integer.parseInt(ShadowDungeon.gameProps.getProperty("bulletKinShootFrequency")) == 0 && isActive()) {
+//        if (frameCounter % Integer.parseInt(ShadowDungeon.gameProps.getProperty("bulletKinShootFrequency")) == 0 && isActive() && !isDead()) {
+//            Fireball fireball= new Fireball(getPosition(), player.getPosition());
+//            this.fireBallArrayList.add(fireball);
+//        }
+
+        if (ShadowDungeon.frameCounter % 100 == 0 && isActive() && !isDead()) {
             Fireball fireball= new Fireball(getPosition(), player.getPosition());
             this.fireBallArrayList.add(fireball);
-
-
         }
+        frameCounter += 1;
+
+
 
             if (!isDead() && isActive()) {
                 drawEnemy();
@@ -167,10 +175,7 @@ class BulletKin extends Enemy {
 
         if (this.fireBallArrayList.size() > 0) {
             for (Fireball fireball1 : fireBallArrayList) {
-                fireball1.setPresent(true);
-                fireball1.update();
-                Point drawPos = fireball1.getDrawPosition();
-                fireball1.getBulletImage().draw(drawPos.x, drawPos.y);
+                fireball1.update(player);
             }
         }
 
@@ -184,9 +189,18 @@ class BulletKin extends Enemy {
             }
         }
 
-        frameCounter += 1;
 
 
         }
+
+
+   public void collideWithWall(Wall wall) {
+        for (int i = 0; i < fireBallArrayList.size(); i ++) {
+            if (wall.hasCollidedWithFireball(fireBallArrayList.get(i))) {
+                fireBallArrayList.get(i).setPresent(false);
+            }
+        }
+   }
+
 
 }
