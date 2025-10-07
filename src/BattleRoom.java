@@ -12,7 +12,7 @@ public class BattleRoom {
     private Player player;
     private Door primaryDoor;
     private Door secondaryDoor;
-    private KeyBulletKin keyBulletKin;
+//    private KeyBulletKin keyBulletKin;
     private NewKeyBulletKin newKeyBulletKin;
     private ArrayList <BulletKin> bulletKinArrayList;
     private ArrayList<TreasureBox> treasureBoxes;
@@ -62,7 +62,7 @@ public class BattleRoom {
                             break;
                         case "keyBulletKin":
                             // remove later
-                            keyBulletKin = new KeyBulletKin(IOUtils.parseInitialMultipleCoords(propertyValue));
+//                            keyBulletKin = new KeyBulletKin(IOUtils.parseInitialMultipleCoords(propertyValue));
                             newKeyBulletKin = new NewKeyBulletKin(IOUtils.parseMultipleCoords(propertyValue));
 //                            newKeyBulletKin.update(IOUtils.parseMultipleCoords(propertyValue));
 
@@ -116,10 +116,10 @@ public class BattleRoom {
             return;
         }
 
-        if (keyBulletKin.isActive()) {
-            keyBulletKin.update(player);
-            keyBulletKin.draw();
-        }
+//        if (keyBulletKin.isActive()) {
+//            keyBulletKin.update(player);
+//            keyBulletKin.draw();
+//        }
 
 
         newKeyBulletKin.update(player);
@@ -236,7 +236,7 @@ public class BattleRoom {
     }
 
     public void activateEnemies() {
-        keyBulletKin.setActive(true);
+//        keyBulletKin.setActive(true);
         newKeyBulletKin.setActive(true);
         for (int i = 0; i < bulletKinArrayList.size(); i ++) {
             bulletKinArrayList.get(i).setActive(true);
