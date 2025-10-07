@@ -22,12 +22,19 @@ public class Bullet {
     public void update() {
         position = position.add(direction.mul(5));
         if (this.isPresent) {
-            System.out.println(isPresent + " is bullet");
             draw();
         }
 
 
 
+    }
+
+    public void bulletDoorCollision(Door door) {
+//        return image.equals(LOCKED) && image.getBoundingBoxAt(position).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()));
+
+        if (!door.isUnlocked() && bulletImage.getBoundingBoxAt(position.asPoint()).intersects(door.getImage().getBoundingBoxAt(door.getPosition()))) {
+            isPresent = false;
+        }
     }
 
 

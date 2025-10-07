@@ -16,6 +16,7 @@ public class BattleRoom {
     private NewKeyBulletKin newKeyBulletKin;
     private ArrayList <BulletKin> bulletKinArrayList;
     private ArrayList<TreasureBox> treasureBoxes;
+    private ArrayList <AshenBulletKin> ashenBulletKinArrayList;
     private ArrayList<Wall> walls;
     private ArrayList<River> rivers;
     private boolean stopCurrentUpdateCall = false; // this determines whether to prematurely stop the update execution
@@ -28,6 +29,7 @@ public class BattleRoom {
         rivers = new ArrayList<>();
         treasureBoxes = new ArrayList<>();
         bulletKinArrayList = new ArrayList<>();
+        ashenBulletKinArrayList = new ArrayList<>();
         this.roomName = roomName;
         this.nextRoomName = nextRoomName;
     }
@@ -68,6 +70,12 @@ public class BattleRoom {
                         case "bulletKin":
                             for (Point point: IOUtils.parseMultipleCoords(coords)) {
                                 bulletKinArrayList.add(new BulletKin(point));
+                            }
+                            break;
+                        case "ashenBulletKin":
+                            for (Point point: IOUtils.parseMultipleCoords(coords)) {
+                                System.out.println("inside ashen");
+                                ashenBulletKinArrayList.add(new AshenBulletKin(point));
                             }
                             break;
 
@@ -120,6 +128,29 @@ public class BattleRoom {
 
         for (int i = 0; i < bulletKinArrayList.size(); i ++) {
             bulletKinArrayList.get(i).update(player);
+            if (bulletKinArrayList.get(i).isDead() && bulletKinArrayList.get(i).isActive()) {
+                if (ShadowDungeon.chosenCharacter.equals("robot")) {
+                    player.earnCoins(15);
+                } else if (ShadowDungeon.chosenCharacter.equals("marine")) {
+                    player.earnCoins(10);
+
+                }
+                bulletKinArrayList.remove(bulletKinArrayList.get(i));
+            }
+
+        }
+
+        for (int i = 0; i < ashenBulletKinArrayList.size(); i ++) {
+            ashenBulletKinArrayList.get(i).update(player);
+            if (ashenBulletKinArrayList.get(i).isDead() && ashenBulletKinArrayList.get(i).isActive()) {
+                if (ShadowDungeon.chosenCharacter.equals("robot")) {
+                    player.earnCoins(25);
+                } else if (ShadowDungeon.chosenCharacter.equals("marine")) {
+                    player.earnCoins(20);
+
+                }
+                ashenBulletKinArrayList.remove(ashenBulletKinArrayList.get(i));
+            }
         }
 
 
@@ -129,7 +160,9 @@ public class BattleRoom {
             wall.draw();
             for (int i = 0; i < bulletKinArrayList.size(); i ++) {
                 bulletKinArrayList.get(i).collideWithWall(wall);
-
+            }
+            for (int i = 0; i < ashenBulletKinArrayList.size(); i ++) {
+                ashenBulletKinArrayList.get(i).collideWithWall(wall);
             }
 
 
@@ -151,6 +184,9 @@ public class BattleRoom {
         if (player != null) {
             player.update(input);
             player.draw();
+            player.checkDoorCollision(primaryDoor);
+            player.checkDoorCollision(secondaryDoor);
+
         }
 
 
@@ -205,11 +241,32 @@ public class BattleRoom {
         for (int i = 0; i < bulletKinArrayList.size(); i ++) {
             bulletKinArrayList.get(i).setActive(true);
         }
+        for (int i = 0; i < ashenBulletKinArrayList.size(); i ++) {
+            ashenBulletKinArrayList.get(i).setActive(true);
+        }
     }
 
     // include all enemies
 
     public boolean noMoreEnemies() {
-        return keyBulletKin.isDead();
+        for (AshenBulletKin ashenBulletKin: ashenBulletKinArrayList) {
+            if (!ashenBulletKin.isDead()) {
+                return false;
+            }
+        }
+        for (BulletKin bulletKin: bulletKinArrayList) {
+            if (!bulletKin.isDead()) {
+                return false;
+            }
+        }
+
+        if (!newKeyBulletKin.isDead()) {
+            return false;
+        }
+
+        return true;
+
+
+//        return keyBulletKin.isDead();
     }
 }

@@ -114,6 +114,13 @@ public class Player {
 
     }
 
+    public void checkDoorCollision(Door door) {
+        for (Bullet bullet: bulletArrayList) {
+            bullet.bulletDoorCollision(door);
+        }
+    }
+
+
     public void clearBulletArray(Bullet bullet) {
         bulletArrayList.remove(bullet);
 

@@ -28,7 +28,6 @@ public class Fireball {
         position = position.add(direction.mul(Double.parseDouble(ShadowDungeon.gameProps.getProperty("fireballSpeed"))));
 
         if (isPresent && fireballImage.getBoundingBoxAt(position.asPoint()).intersects(player.getCurrImage().getBoundingBoxAt(player.getPosition()))) {
-            System.out.println("player damages");
             player.receiveDamage(Double.parseDouble(ShadowDungeon.gameProps.getProperty("fireballDamage")));
         }
 

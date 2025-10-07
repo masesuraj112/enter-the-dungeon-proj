@@ -51,6 +51,10 @@ public class Door {
         return image.getBoundingBoxAt(position).intersects(player.getCurrImage().getBoundingBoxAt(player.getPosition()));
     }
 
+//    public boolean hasCollidedWithBullet(Bullet bullet) {
+//        return image.equals(LOCKED) && image.getBoundingBoxAt(position).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()));
+//    }
+
     private void onCollideWith(Player player) {
         // when the player only just entered this door's room, overlapping with the unlocked door shouldn't trigger room transition
         if (unlocked && !justEntered) {
@@ -90,5 +94,9 @@ public class Door {
 
     public Point getPosition() {
         return position;
+    }
+
+    public Image getImage() {
+        return image;
     }
 }
