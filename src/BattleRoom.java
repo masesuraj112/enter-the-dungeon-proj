@@ -128,6 +128,11 @@ public class BattleRoom {
 
         for (int i = 0; i < bulletKinArrayList.size(); i ++) {
             bulletKinArrayList.get(i).update(player);
+
+            bulletKinArrayList.get(i).fireballDoorCollision(primaryDoor, secondaryDoor, bulletKinArrayList.get(i).getFireBallArrayList());
+
+
+
             if (bulletKinArrayList.get(i).isDead() && bulletKinArrayList.get(i).isActive()) {
                 if (ShadowDungeon.chosenCharacter.equals("robot")) {
                     player.earnCoins(15);
@@ -142,6 +147,7 @@ public class BattleRoom {
 
         for (int i = 0; i < ashenBulletKinArrayList.size(); i ++) {
             ashenBulletKinArrayList.get(i).update(player);
+            ashenBulletKinArrayList.get(i).fireballDoorCollision(primaryDoor, secondaryDoor, ashenBulletKinArrayList.get(i).getFireBallArrayList() );
             if (ashenBulletKinArrayList.get(i).isDead() && ashenBulletKinArrayList.get(i).isActive()) {
                 if (ShadowDungeon.chosenCharacter.equals("robot")) {
                     player.earnCoins(25);
@@ -150,6 +156,7 @@ public class BattleRoom {
 
                 }
                 ashenBulletKinArrayList.remove(ashenBulletKinArrayList.get(i));
+
             }
         }
 
