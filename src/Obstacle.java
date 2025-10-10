@@ -40,6 +40,11 @@ abstract public class Obstacle {
             player.move(player.getPrevPosition().x, player.getPrevPosition().y);
 
         }
+        for (Bullet bullet: player.getBulletArrayList()) {
+            if (isActive() && bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()).intersects(getObstacleImage().getBoundingBoxAt(getCurrentPosition()))) {
+                setActive(false);
+            }
+        }
     }
 
 
@@ -56,6 +61,7 @@ class Table extends Obstacle {
         if (isActive()) {
             getObstacleImage().draw(getCurrentPosition().x, getCurrentPosition().y);
         }
+
     }
 
 }
@@ -68,7 +74,23 @@ class Basket extends Obstacle {
 
     }
     public void update() {
-        System.out.println("e");
+        if (isActive()) {
+            getObstacleImage().draw(getCurrentPosition().x, getCurrentPosition().y);
+        }
+    }
+    @Override
+    public void collideWithPlayer(Player player) {
+        if (isActive() && player.getCurrImage().getBoundingBoxAt(player.getPosition()).intersects(getObstacleImage().getBoundingBoxAt(getCurrentPosition()))) {
+            player.move(player.getPrevPosition().x, player.getPrevPosition().y);
+
+        }
+
+        for (Bullet bullet: player.getBulletArrayList()) {
+            if (isActive() && bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()).intersects(getObstacleImage().getBoundingBoxAt(getCurrentPosition()))) {
+                setActive(false);
+                player.earnCoins(20);
+            }
+        }
     }
 
 }

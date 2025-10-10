@@ -99,6 +99,11 @@ public class BattleRoom {
                         case "table":
                             Table table = new Table(IOUtils.parseCoords(coords));
                             tables.add(table);
+                            break;
+                        case "basket":
+                            Basket basket = new Basket(IOUtils.parseCoords(coords));
+                            baskets.add(basket);
+                            break;
 
 
 
@@ -201,6 +206,11 @@ public class BattleRoom {
             table.collideWithPlayer(player);
         }
 
+        for (Basket basket: baskets) {
+            basket.update();
+            basket.collideWithPlayer(player);
+        }
+
         if (player != null) {
             player.update(input);
             player.draw();
@@ -270,6 +280,7 @@ public class BattleRoom {
     public void activateObstacles() {
         for (int i = 0; i < tables.size(); i ++) {
             tables.get(i).setActive(true);
+            baskets.get(i).setActive(true);
         }
     }
 
