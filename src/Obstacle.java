@@ -47,6 +47,11 @@ abstract public class Obstacle {
         }
     }
 
+//    public void collideWithFireball(Enemy enemy) {
+//        for (Fireball fireball: enemy.)
+//
+//    }
+
 
 }
 

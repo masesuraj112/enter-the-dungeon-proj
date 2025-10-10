@@ -305,6 +305,5 @@ public class BattleRoom {
         return true;
 
 
-//        return keyBulletKin.isDead();
     }
 }
