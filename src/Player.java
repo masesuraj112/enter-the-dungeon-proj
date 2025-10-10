@@ -100,12 +100,21 @@ public class Player {
         }
 
         if (this.bulletArrayList.size() > 0) {
-            for (Bullet bullet: bulletArrayList) {
-                bullet.update();
-
+//            for (Bullet bullet: bulletArrayList) {
+//                bullet.update();
+//
+//
+//            }
+            for (int i = 0; i < bulletArrayList.size(); i ++) {
+                if (!bulletArrayList.get(i).isPresent()) {
+                    bulletArrayList.remove(bulletArrayList.get(i));
+                } else {
+                    bulletArrayList.get(i).update();
+                }
             }
 
         }
+
 
 
 

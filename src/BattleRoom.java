@@ -17,6 +17,8 @@ public class BattleRoom {
     private ArrayList <BulletKin> bulletKinArrayList;
     private ArrayList<TreasureBox> treasureBoxes;
     private ArrayList <AshenBulletKin> ashenBulletKinArrayList;
+    private ArrayList<Basket> baskets;
+    private ArrayList<Table> tables;
     private ArrayList<Wall> walls;
     private ArrayList<River> rivers;
     private boolean stopCurrentUpdateCall = false; // this determines whether to prematurely stop the update execution
@@ -30,6 +32,8 @@ public class BattleRoom {
         treasureBoxes = new ArrayList<>();
         bulletKinArrayList = new ArrayList<>();
         ashenBulletKinArrayList = new ArrayList<>();
+        tables = new ArrayList<>();
+        baskets = new ArrayList<>();
         this.roomName = roomName;
         this.nextRoomName = nextRoomName;
     }
@@ -92,6 +96,10 @@ public class BattleRoom {
                             River river = new River(IOUtils.parseCoords(coords));
                             rivers.add(river);
                             break;
+                        case "table":
+                            Table table = new Table(IOUtils.parseCoords(coords));
+                            tables.add(table);
+
 
 
                         default:
@@ -188,6 +196,11 @@ public class BattleRoom {
             }
         }
 
+        for (Table table: tables) {
+            table.update();
+            table.collideWithPlayer(player);
+        }
+
         if (player != null) {
             player.update(input);
             player.draw();
@@ -195,6 +208,7 @@ public class BattleRoom {
             player.checkDoorCollision(secondaryDoor);
 
         }
+
 
 
 
@@ -250,6 +264,12 @@ public class BattleRoom {
         }
         for (int i = 0; i < ashenBulletKinArrayList.size(); i ++) {
             ashenBulletKinArrayList.get(i).setActive(true);
+        }
+    }
+
+    public void activateObstacles() {
+        for (int i = 0; i < tables.size(); i ++) {
+            tables.get(i).setActive(true);
         }
     }
 

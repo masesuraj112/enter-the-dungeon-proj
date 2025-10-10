@@ -75,6 +75,7 @@ public class Door {
                 unlocked = false;
                 image = LOCKED;
                 battleRoom.activateEnemies();
+                battleRoom.activateObstacles();
             }
         }
     }

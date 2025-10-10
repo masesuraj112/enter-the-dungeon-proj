@@ -40,6 +40,7 @@ public class Bullet {
 
 
 
+
     public void setPresent(boolean present) {
         this.isPresent = present;
     }
