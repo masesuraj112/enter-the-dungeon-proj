@@ -10,9 +10,6 @@ abstract public class Enemy {
     private boolean active = false; // only true when the Battle Room has been activated
     private boolean dead = false;
     private Point position;
-
-
-
     public void draw() {
         enemyImage.draw(position.x, position.y);
     }
