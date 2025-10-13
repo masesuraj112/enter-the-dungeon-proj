@@ -121,10 +121,11 @@ class NewKeyBulletKin extends Enemy {
         if (player.getBulletArrayList().size() > 0) {
             for (Bullet bullet: player.getBulletArrayList()) {
                 if (collidedWithBullet(bullet)) {
-
-                    if (player.getWeapon() == 0) {
-                        setHealth(getHealth() - Double.parseDouble(ShadowDungeon.gameProps.getProperty("weaponStandardDamage")));
-                    }
+                    setHealth(getHealth() - player.giveDamage());
+//
+//                    if (player.getWeapon() == 0) {
+//                        setHealth(getHealth() - player.giveDamage()));
+//                    } else if
                 }
 
             }
@@ -228,9 +229,9 @@ class BulletKin extends BulletKinType {
             }
         }
 
+
         if (player.getBulletArrayList().size() > 0) {
             for (Bullet bullet: player.getBulletArrayList()) {
-//                return image.getBoundingBoxAt(position).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()));
 
                 if (getEnemyImage().getBoundingBoxAt(getPosition()).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()))) {
                     setHealth(getHealth() - player.giveDamage());
