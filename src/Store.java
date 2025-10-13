@@ -12,7 +12,6 @@ public class Store {
     public static void operateStore(Input input) {
         System.out.println(isOpen);
         if (input.wasPressed(Keys.SPACE) && !isOpen) {
-            System.out.println("open store");
             isOpen = true;
         } else if (input.wasPressed(Keys.SPACE) && isOpen) {
             isOpen = false;
@@ -20,6 +19,11 @@ public class Store {
 
         if (isOpen) {
             storeImage.draw(Double.parseDouble(ShadowDungeon.gameProps.getProperty("window.width")) / 2, Double.parseDouble(ShadowDungeon.gameProps.getProperty("window.height")) / 2);
+
+         if (input.wasPressed(Keys.P)) {
+             ShadowDungeon.resetGameState(ShadowDungeon.getGameProps());
+             isOpen = false;
+         }
 
 
 
