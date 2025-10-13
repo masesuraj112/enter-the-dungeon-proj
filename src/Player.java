@@ -110,7 +110,7 @@ public class Player {
             move(currX, currY);
         }
 
-        if (input.wasPressed(Keys.SPACE) && isStoreOpen == false) {
+        if (input.wasPressed(Keys.SPACE) && isStoreOpen == false && health > 0) {
             isStoreOpen = true;
         } else if (input.wasPressed(Keys.SPACE) && isStoreOpen == true) {
             isStoreOpen = false;
@@ -251,8 +251,13 @@ public class Player {
         this.position = position;
     }
 
+    public boolean isStoreOpen() {
+        return isStoreOpen;
+    }
 
-
+    public void setStoreOpen(boolean storeOpen) {
+        isStoreOpen = storeOpen;
+    }
 }
 
 

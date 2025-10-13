@@ -104,10 +104,13 @@ class NewKeyBulletKin extends Enemy {
             Vector2 target = new Vector2(PointsArrayList.get(currentTarget).x, PointsArrayList.get(currentTarget).y);
             Vector2 direction = target.sub(current);
 
-            if (direction.length() < 5) {
+            if (direction.length() < 5 ) {
                 setPosition(target.asPoint());
+                if (!player.isStoreOpen()) {
+                    currentTarget += 1;
 
-                currentTarget += 1;
+                }
+
 
             } else {
                 setPosition(current.add(direction.normalised().mul(4)).asPoint());
@@ -223,7 +226,7 @@ class BulletKin extends BulletKinType {
             setDead(true);
         }
 
-        if (getFireBallArrayList().size() > 0) {
+        if (getFireBallArrayList().size() > 0 && !player.isStoreOpen()) {
             for (Fireball fireball1 : getFireBallArrayList()) {
                 fireball1.update(player);
             }
@@ -279,7 +282,7 @@ class AshenBulletKin extends BulletKinType {
             setDead(true);
         }
 
-        if (getFireBallArrayList().size() > 0) {
+        if (getFireBallArrayList().size() > 0 && !player.isStoreOpen()) {
             for (Fireball fireball1 : getFireBallArrayList()) {
                 fireball1.update(player);
             }
