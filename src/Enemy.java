@@ -10,6 +10,10 @@ abstract public class Enemy {
     private boolean active = false; // only true when the Battle Room has been activated
     private boolean dead = false;
     private Point position;
+    private boolean isStoreOpen;
+
+
+
     public void draw() {
         enemyImage.draw(position.x, position.y);
     }
@@ -19,6 +23,7 @@ abstract public class Enemy {
     public boolean isActive() {
         return active;
     }
+
 
     public void setActive(boolean active) {
         this.active = active;
@@ -58,6 +63,13 @@ abstract public class Enemy {
         return position;
     }
 
+    public boolean isStoreOpen() {
+        return isStoreOpen;
+    }
+
+    public void setStoreOpen(boolean storeOpen) {
+        isStoreOpen = storeOpen;
+    }
 }
 
 
@@ -76,6 +88,8 @@ class NewKeyBulletKin extends Enemy {
         setPosition(points.get(0));
         setActive(false);
         this.newKey = new Key();
+        setStoreOpen(false);
+
     }
 
     @Override

@@ -85,6 +85,21 @@ public class Player {
             currY += speed;
         }
 
+        if (isStoreOpen) {
+            if (getCoins() >= 50) {
+                if (input.wasPressed(Keys.E)) {
+                    health += 50;
+                    coins -= 50;
+                }
+
+                if (input.wasPressed(Keys.L) && weapon <= 1) {
+                    weapon += 1;
+                    coins -= 50;
+
+                }
+            }
+        }
+
         faceLeft = input.getMouseX() < currX;
 
         // update the player position accordingly and ensure it can't move past the game window
@@ -143,6 +158,8 @@ public class Player {
             bullet.bulletDoorCollision(door);
         }
     }
+
+
 
 
     public void clearBulletArray(Bullet bullet) {
@@ -213,8 +230,9 @@ public class Player {
         return currImage;
     }
 
-
-
+    public void setWeapon(double weapon) {
+        this.weapon = weapon;
+    }
 
     public Point getPrevPosition() {
         return prevPosition;
