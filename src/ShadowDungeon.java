@@ -18,6 +18,7 @@ public class ShadowDungeon extends AbstractGame {
     private static BattleRoom battleRoomB;
     private static EndRoom endRoom;
     private static Player player;
+    private static Store store;
     private final Image background;
     
     public static final String PREP_ROOM_NAME = "prep";
@@ -39,6 +40,9 @@ public class ShadowDungeon extends AbstractGame {
         screenHeight = Integer.parseInt(gameProps.getProperty("window.height"));
         this.background = new Image("res/background.png");
         frameCounter = 0;
+        store = new Store();
+
+
 
         resetGameState(gameProps);
     }
@@ -73,23 +77,32 @@ public class ShadowDungeon extends AbstractGame {
             Window.close();
         }
         frameCounter += 1;
-
         background.draw((double) Window.getWidth() / 2, (double) Window.getHeight() / 2);
-
-
         switch (currRoomName) {
             case PREP_ROOM_NAME:
                 prepRoom.update(input);
+                store.operateStore(input);
                 return;
             case BATTLE_ROOM_A_NAME:
                 battleRoomA.update(input);
+                store.operateStore(input);
                 return;
             case BATTLE_ROOM_B_NAME:
                 battleRoomB.update(input);
+                store.operateStore(input);
                 return;
             default:
                 endRoom.update(input);
+                store.operateStore(input);
+
+
         }
+
+
+
+
+
+
 
     }
 

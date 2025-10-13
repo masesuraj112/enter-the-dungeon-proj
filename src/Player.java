@@ -17,6 +17,7 @@ public class Player {
     private double keys = 0;
     private double weapon = 0;
     private ArrayList<Bullet> bulletArrayList;
+    private boolean isStoreOpen;
 
 //    public static String chosenCharacter;
 
@@ -32,6 +33,7 @@ public class Player {
         this.health = Double.parseDouble(ShadowDungeon.getGameProps().getProperty("initialHealth"));
         ShadowDungeon.chosenCharacter = "null";
         this.bulletArrayList = new ArrayList<>();
+        isStoreOpen = false;
 
 
     }
@@ -47,6 +49,7 @@ public class Player {
         this.bulletArrayList = new ArrayList<>();
 
     }
+
 
     public Player() {
 //        this.currImage = new Image("res/player_right.png");
@@ -69,16 +72,16 @@ public class Player {
         double currX = position.x;
         double currY = position.y;
 
-        if (input.isDown(Keys.A)) {
+        if (input.isDown(Keys.A) && !isStoreOpen) {
             currX -= speed;
         }
-        if (input.isDown(Keys.D)) {
+        if (input.isDown(Keys.D) && !isStoreOpen) {
             currX += speed;
         }
-        if (input.isDown(Keys.W)) {
+        if (input.isDown(Keys.W) && !isStoreOpen) {
             currY -= speed;
         }
-        if (input.isDown(Keys.S)) {
+        if (input.isDown(Keys.S) && !isStoreOpen) {
             currY += speed;
         }
 
@@ -92,12 +95,24 @@ public class Player {
             move(currX, currY);
         }
 
+        if (input.wasPressed(Keys.SPACE) && isStoreOpen == false) {
+            isStoreOpen = true;
+        } else if (input.wasPressed(Keys.SPACE) && isStoreOpen == true) {
+            isStoreOpen = false;
+        }
+
+
 
 
         if ((ShadowDungeon.chosenCharacter.equals("robot") || ShadowDungeon.chosenCharacter.equals("marine")) && wasAnyMousePressed(input)) {
             Bullet newBullet = new Bullet(getPosition(), input);
             this.bulletArrayList.add(newBullet);
         }
+
+
+
+
+
 
         if (this.bulletArrayList.size() > 0) {
 //            for (Bullet bullet: bulletArrayList) {
@@ -158,7 +173,6 @@ public class Player {
     public void receiveDamage(double damage) {
         health -= damage;
         if (health <= 0) {
-            System.out.println("change room");
             ShadowDungeon.changeToGameOverRoom();
         }
     }
@@ -214,7 +228,16 @@ public class Player {
         this.keys = numKeys;
 
     }
+
+    public void setPosition(Point position) {
+        this.position = position;
+    }
+
+
+
 }
+
+
 
 
 class mainCharacter extends Player {
