@@ -146,7 +146,7 @@ class NewKeyBulletKin extends Enemy {
 
 }
 
-abstract class BulletKinType extends Enemy {
+abstract class BulletKinType extends Enemy implements Weapon {
     private int currentTarget;
     private ArrayList<Fireball> fireBallArrayList;
     public ArrayList<Fireball> getFireBallArrayList() {
@@ -249,7 +249,7 @@ class BulletKin extends BulletKinType {
 }
 
 
-class AshenBulletKin extends BulletKinType {
+class AshenBulletKin extends BulletKinType implements Weapon {
     public AshenBulletKin(Point position) {
         setEnemyImage(new Image("res/ashen_bullet_kin.png"));
         setHealth(Double.parseDouble(ShadowDungeon.gameProps.getProperty("ashenBulletKinHealth")));
