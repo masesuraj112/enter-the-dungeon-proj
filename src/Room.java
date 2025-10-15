@@ -20,6 +20,7 @@ abstract public class Room {
 
     public void setPlayer(Player player) {
         this.player = player;
+        stopCurrentUpdateCall = false;
     }
 
     public boolean isStopCurrentUpdateCall() {
@@ -222,7 +223,6 @@ class EndRoom extends Room {
 class BattleRoom extends Room {
     private Door primaryDoor;
     private Door secondaryDoor;
-    //    private KeyBulletKin keyBulletKin;
     private NewKeyBulletKin newKeyBulletKin;
     private ArrayList<BulletKin> bulletKinArrayList;
     private ArrayList<TreasureBox> treasureBoxes;
@@ -311,8 +311,6 @@ class BattleRoom extends Room {
                             Basket basket = new Basket(IOUtils.parseCoords(coords));
                             baskets.add(basket);
                             break;
-
-
                         default:
                     }
                 }
