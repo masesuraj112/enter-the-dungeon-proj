@@ -62,8 +62,10 @@ public class Bullet {
     public Image getBulletImage() {
         return bulletImage;
     }
+    /*
+     draws the bullet at a specified position
+    */
     private void draw() {
-        // Draws the bullet at a specified position
         bulletImage.draw(position.x, position.y);
     }
     /** This a getter the current position of a bullet

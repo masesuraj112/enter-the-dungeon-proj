@@ -11,7 +11,6 @@ public class ShadowDungeon extends AbstractGame {
     public static Properties messageProps;
     public static double screenWidth;
     public static double screenHeight;
-
     private static String currRoomName;
     private static PrepRoom prepRoom;
     private static BattleRoom battleRoomA;
@@ -49,19 +48,15 @@ public class ShadowDungeon extends AbstractGame {
         battleRoomA = new BattleRoom(BATTLE_ROOM_A_NAME, BATTLE_ROOM_B_NAME);
         battleRoomB = new BattleRoom(BATTLE_ROOM_B_NAME, END_ROOM_NAME);
         endRoom = new EndRoom();
-
         prepRoom.initEntities(gameProps);
         battleRoomA.initEntities(gameProps);
         battleRoomB.initEntities(gameProps);
         endRoom.initEntities(gameProps);
-
         currRoomName = PREP_ROOM_NAME;
-
         ShadowDungeon.player = new Player(IOUtils.parseCoords(gameProps.getProperty("player.start")));
         chosenCharacter = "none";
         prepRoom.setPlayer(player);
         frameCounter = 0;
-
     }
 
     /**
@@ -91,8 +86,6 @@ public class ShadowDungeon extends AbstractGame {
             default:
                 endRoom.update(input);
                 store.operateStore(input);
-
-
         }
 
 
@@ -106,7 +99,6 @@ public class ShadowDungeon extends AbstractGame {
     public static Player changePlayer(String chosenCharacter) {
         if (chosenCharacter.equals("marine")) {
             return new Marine(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
-
         } else if (chosenCharacter.equals("robot")) {
             return new Robot(player.getPosition(), "res/marine.png", player.getSpeed(), player.getHealth(), player.getCoins(), player.getPrevPosition(), player.getKeys());
 
@@ -190,10 +182,8 @@ public class ShadowDungeon extends AbstractGame {
                 battleRoomB.stopCurrentUpdateCall();
             default:
         }
-
         endRoom.isGameOver();
         currRoomName = END_ROOM_NAME;
-
         Point startPos = IOUtils.parseCoords(ShadowDungeon.getGameProps().getProperty("player.start"));
         player.move(startPos.x, startPos.y);
         endRoom.setPlayer(player);

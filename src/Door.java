@@ -66,7 +66,9 @@ public class Door {
     public boolean hasCollidedWith(Player player) {
         return image.getBoundingBoxAt(position).intersects(player.getCurrImage().getBoundingBoxAt(player.getPosition()));
     }
-
+    /*
+    Handles logic when player has entered the door for the first time
+    */
     private void onCollideWith(Player player) {
         // when the player only just entered this door's room, overlapping with the unlocked door shouldn't trigger room transition
         if (unlocked && !justEntered) {
@@ -76,7 +78,9 @@ public class Door {
             player.move(player.getPrevPosition().x, player.getPrevPosition().y);
         }
     }
-
+    /*
+    Handles logic when player exits from the unlocked door for the first time
+    */
     private void onNoLongerCollide() {
         // when the player only just moved away from the unlocked door after walking through it
         if (unlocked && justEntered) {
