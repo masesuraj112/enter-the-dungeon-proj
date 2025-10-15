@@ -41,9 +41,6 @@ public class ShadowDungeon extends AbstractGame {
         this.background = new Image("res/background.png");
         frameCounter = 0;
         store = new Store();
-
-
-
         resetGameState(gameProps);
     }
 
@@ -122,26 +119,18 @@ public class ShadowDungeon extends AbstractGame {
         switch (roomName) {
             case PREP_ROOM_NAME:
                 nextDoor = prepRoom.findDoorByDestination();
-
                 // assume that prep room can only be entered through Battle Room A
                 if (currRoomName.equals(BATTLE_ROOM_A_NAME)) {
-//                    battleRoomA.stopCurrentUpdateCall();
                     battleRoomA.stopCurrentUpdateCall();
                 }
                 currRoomName = PREP_ROOM_NAME;
-
                 // move the player to the center of the next room's door
                 nextDoor.unlock(true);
                 player.move(nextDoor.getPosition().x, nextDoor.getPosition().y);
                 prepRoom.setPlayer(player);
-
-
-
                 return;
             case BATTLE_ROOM_A_NAME:
-                System.out.println("inside room a");
                 nextDoor = battleRoomA.findDoorByDestination(currRoomName);
-
                 // assume that Battle Room A can only be entered through Prep Room or Battle Room B
                 if (currRoomName.equals(BATTLE_ROOM_B_NAME)) {
                     battleRoomB.stopCurrentUpdateCall();
@@ -150,21 +139,17 @@ public class ShadowDungeon extends AbstractGame {
                     prepRoom.stopCurrentUpdateCall();
                 }
                 currRoomName = BATTLE_ROOM_A_NAME;
-
                 // prepare the door to be able to activate the Battle Room
                 if (!battleRoomA.isComplete()) {
                     nextDoor.setShouldLockAgain();
                 }
-
                 // move the player to the center of the next room's door
                 nextDoor.unlock(true);
                 player.move(nextDoor.getPosition().x, nextDoor.getPosition().y);
                 battleRoomA.setPlayer(player);
-
                 return;
             case BATTLE_ROOM_B_NAME:
                 nextDoor = battleRoomB.findDoorByDestination(currRoomName);
-
                 // assume that Battle Room B can only be entered through Battle Room A or End Room
                 if (currRoomName.equals(BATTLE_ROOM_A_NAME)) {
                     battleRoomA.stopCurrentUpdateCall();
@@ -172,27 +157,22 @@ public class ShadowDungeon extends AbstractGame {
                     endRoom.stopCurrentUpdateCall();
                 }
                 currRoomName = BATTLE_ROOM_B_NAME;
-
                 // prepare the door to be able to activate the Battle Room
                 if (!battleRoomB.isComplete()) {
                     nextDoor.setShouldLockAgain();
                 }
-
                 // move the player to the center of the next room's door
                 nextDoor.unlock(true);
                 player.move(nextDoor.getPosition().x, nextDoor.getPosition().y);
                 battleRoomB.setPlayer(player);
-
                 return;
             default:
                 nextDoor = endRoom.findDoorByDestination();
-
                 // assume that end room can only be entered through Battle Room B
                 if (currRoomName.equals(BATTLE_ROOM_B_NAME)) {
                     battleRoomB.stopCurrentUpdateCall();
                 }
                 currRoomName = END_ROOM_NAME;
-
                 // move the player to the center of the next room's door
                 nextDoor.unlock(true);
                 player.move(nextDoor.getPosition().x, nextDoor.getPosition().y);

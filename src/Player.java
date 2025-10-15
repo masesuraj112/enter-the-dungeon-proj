@@ -263,10 +263,7 @@ public class Player {
 
 
 
-class mainCharacter extends Player {
 
-
-}
 
 class Robot extends Player {
 

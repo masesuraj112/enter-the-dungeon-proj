@@ -11,9 +11,6 @@ abstract public class Enemy {
     private boolean dead = false;
     private Point position;
     private boolean isStoreOpen;
-
-
-
     public void draw() {
         enemyImage.draw(position.x, position.y);
     }
@@ -23,19 +20,15 @@ abstract public class Enemy {
     public boolean isActive() {
         return active;
     }
-
-
     public void setActive(boolean active) {
         this.active = active;
     }
     public boolean hasCollidedWith(Player player) {
         return enemyImage.getBoundingBoxAt(position).intersects(player.getCurrImage().getBoundingBoxAt(player.getPosition()));
     }
-
     public void drawEnemy() {
         getEnemyImage().draw(getPosition().x, getPosition().y);
     }
-
     public boolean collidedWithBullet(Bullet bullet) {
         return getEnemyImage().getBoundingBoxAt(getPosition()).intersects(bullet.getDrawPosition());
     }
@@ -66,7 +59,6 @@ abstract public class Enemy {
     public boolean isStoreOpen() {
         return isStoreOpen;
     }
-
     public void setStoreOpen(boolean storeOpen) {
         isStoreOpen = storeOpen;
     }
@@ -125,12 +117,7 @@ class NewKeyBulletKin extends Enemy {
             for (Bullet bullet: player.getBulletArrayList()) {
                 if (collidedWithBullet(bullet)) {
                     setHealth(getHealth() - player.giveDamage());
-//
-//                    if (player.getWeapon() == 0) {
-//                        setHealth(getHealth() - player.giveDamage()));
-//                    } else if
                 }
-
             }
         }
         if (getHealth() < 0 && isActive()) {
@@ -193,7 +180,7 @@ abstract class BulletKinType extends Enemy implements Weapon {
 
 }
 
-class BulletKin extends BulletKinType {
+class BulletKin extends BulletKinType implements Weapon {
     public BulletKin(Point position) {
         setEnemyImage(new Image("res/bullet_kin.png"));
         setHealth(Double.parseDouble(ShadowDungeon.gameProps.getProperty("bulletKinHealth")));
@@ -257,8 +244,6 @@ class AshenBulletKin extends BulletKinType implements Weapon {
         setCurrentTarget(0);
         setPosition(position);
         setActive(false);
-//        frameCounter = 0;
-//        this.fireBallArrayList = new ArrayList<>();
         setFireBallArrayList(new ArrayList<>());
 
 
@@ -268,7 +253,6 @@ class AshenBulletKin extends BulletKinType implements Weapon {
     public void update(Player player) {
         if (ShadowDungeon.frameCounter % Integer.parseInt(ShadowDungeon.gameProps.getProperty("ashenBulletKinShootFrequency")) == 0 && isActive() && !isDead()) {
             Fireball fireball= new Fireball(getPosition(), player.getPosition());
-//            this.fireBallArrayList.add(fireball);
             getFireBallArrayList().add(fireball);
         }
 
@@ -290,8 +274,6 @@ class AshenBulletKin extends BulletKinType implements Weapon {
 
         if (player.getBulletArrayList().size() > 0) {
             for (Bullet bullet: player.getBulletArrayList()) {
-//                return image.getBoundingBoxAt(position).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()));
-
                 if (getEnemyImage().getBoundingBoxAt(getPosition()).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()))) {
                     setHealth(getHealth() - player.giveDamage());
                 }
@@ -303,190 +285,3 @@ class AshenBulletKin extends BulletKinType implements Weapon {
     }
 
 }
-
-
-
-
-
-
-//class BulletKin extends Enemy {
-//    private int currentTarget;
-//    private ArrayList<Fireball> fireBallArrayList;
-//    public static int frameCounter;
-//
-//
-//    public BulletKin(Point position) {
-//        setEnemyImage(new Image("res/bullet_kin.png"));
-//        setHealth(Double.parseDouble(ShadowDungeon.gameProps.getProperty("bulletKinHealth")));
-//        setDead(false);
-//        currentTarget = 0;
-//        setPosition(position);
-//        setActive(false);
-////        frameCounter = 0;
-//        this.fireBallArrayList = new ArrayList<>();
-//
-//    }
-//
-//    public ArrayList<Fireball> getFireBallArrayList() {
-//        return fireBallArrayList;
-//    }
-//
-//    @Override
-//    public void update(Player player) {
-//        if (ShadowDungeon.frameCounter % Integer.parseInt(ShadowDungeon.gameProps.getProperty("bulletKinShootFrequency")) == 0 && isActive() && !isDead()) {
-//            Fireball fireball= new Fireball(getPosition(), player.getPosition());
-//            this.fireBallArrayList.add(fireball);
-//        }
-//
-//
-//
-//
-//
-//        if (!isDead() && isActive()) {
-//            drawEnemy();
-//
-//        }
-//
-//        if (getHealth() < 0 && isActive()) {
-//            setDead(true);
-//        }
-//
-//        if (this.fireBallArrayList.size() > 0) {
-//            for (Fireball fireball1 : fireBallArrayList) {
-//                fireball1.update(player);
-//            }
-//        }
-//
-//        if (player.getBulletArrayList().size() > 0) {
-//            for (Bullet bullet: player.getBulletArrayList()) {
-////                return image.getBoundingBoxAt(position).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()));
-//
-//                if (getEnemyImage().getBoundingBoxAt(getPosition()).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()))) {
-//                    setHealth(getHealth() - player.giveDamage());
-//                }
-//            }
-//        }
-//
-//
-//
-//    }
-//
-//    public void fireballDoorCollision (Door primaryDoor, Door secondaryDoor, ArrayList<Fireball> fireBallArrayList) {
-////        if (isPresent && fireballImage.getBoundingBoxAt(position.asPoint()).intersects(player.getCurrImage().getBoundingBoxAt(player.getPosition()))) {
-////            player.receiveDamage(Double.parseDouble(ShadowDungeon.gameProps.getProperty("fireballDamage")));
-////        }
-//        for (Fireball fireball: fireBallArrayList) {
-//            if (!primaryDoor.isUnlocked() && primaryDoor.getImage().getBoundingBoxAt(primaryDoor.getPosition()).intersects(fireball.getFireballImage().getBoundingBoxAt(fireball.getDrawPosition()))) {
-//                fireball.setPresent(false);
-//            }
-//            if (!secondaryDoor.isUnlocked() && secondaryDoor.getImage().getBoundingBoxAt(secondaryDoor.getPosition()).intersects(fireball.getFireballImage().getBoundingBoxAt(fireball.getDrawPosition()))) {
-//                fireball.setPresent(false);
-//            }
-//        }
-//
-//    }
-//
-//
-//    public void collideWithWall(Wall wall) {
-//        for (int i = 0; i < fireBallArrayList.size(); i ++) {
-//            if (wall.hasCollidedWithFireball(fireBallArrayList.get(i))) {
-//                fireBallArrayList.get(i).setPresent(false);
-//            }
-//        }
-//    }
-//
-//
-//}
-//
-//
-//
-//
-//class AshenBulletKin extends Enemy {
-//    private int currentTarget;
-//    private ArrayList<Fireball> fireBallArrayList;
-//
-//
-//    public AshenBulletKin(Point position) {
-//        setEnemyImage(new Image("res/ashen_bullet_kin.png"));
-//        setHealth(Double.parseDouble(ShadowDungeon.gameProps.getProperty("ashenBulletKinHealth")));
-//        setDead(false);
-//        currentTarget = 0;
-//        setPosition(position);
-//        setActive(false);
-//        this.fireBallArrayList = new ArrayList<>();
-//
-//    }
-//
-//    public ArrayList<Fireball> getFireBallArrayList() {
-//        return fireBallArrayList;
-//    }
-//
-//    @Override
-//    public void update(Player player) {
-//        if (ShadowDungeon.frameCounter % Integer.parseInt(ShadowDungeon.gameProps.getProperty("ashenBulletKinShootFrequency")) == 0 && isActive() && !isDead()) {
-//            Fireball fireball= new Fireball(getPosition(), player.getPosition());
-//            this.fireBallArrayList.add(fireball);
-//        }
-//
-//
-//
-//        if (!isDead() && isActive()) {
-//            drawEnemy();
-//
-//        }
-//
-//        if (getHealth() < 0 && isActive()) {
-//            setDead(true);
-//        }
-//
-//        if (this.fireBallArrayList.size() > 0) {
-//            for (Fireball fireball1 : fireBallArrayList) {
-//                fireball1.update(player);
-//            }
-//        }
-//
-//        if (player.getBulletArrayList().size() > 0) {
-//            for (Bullet bullet: player.getBulletArrayList()) {
-////                return image.getBoundingBoxAt(position).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()));
-//
-//                if (getEnemyImage().getBoundingBoxAt(getPosition()).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()))) {
-//                    setHealth(getHealth() - player.giveDamage());
-//                }
-//            }
-//        }
-//
-//
-//
-//    }
-//
-//    public void fireballDoorCollision (Door primaryDoor, Door secondaryDoor, ArrayList<Fireball> fireBallArrayList) {
-////        if (isPresent && fireballImage.getBoundingBoxAt(position.asPoint()).intersects(player.getCurrImage().getBoundingBoxAt(player.getPosition()))) {
-////            player.receiveDamage(Double.parseDouble(ShadowDungeon.gameProps.getProperty("fireballDamage")));
-////        }
-//        for (Fireball fireball: fireBallArrayList) {
-//            if (!primaryDoor.isUnlocked() && primaryDoor.getImage().getBoundingBoxAt(primaryDoor.getPosition()).intersects(fireball.getFireballImage().getBoundingBoxAt(fireball.getDrawPosition()))) {
-//                fireball.setPresent(false);
-//            }
-//            if (!secondaryDoor.isUnlocked() && secondaryDoor.getImage().getBoundingBoxAt(secondaryDoor.getPosition()).intersects(fireball.getFireballImage().getBoundingBoxAt(fireball.getDrawPosition()))) {
-//                fireball.setPresent(false);
-//            }
-//        }
-//
-//    }
-//
-//
-//
-//
-//    public void collideWithWall(Wall wall) {
-//        for (int i = 0; i < fireBallArrayList.size(); i ++) {
-//            if (wall.hasCollidedWithFireball(fireBallArrayList.get(i))) {
-//                fireBallArrayList.get(i).setPresent(false);
-//            }
-//        }
-//    }
-//
-//
-//
-//
-//}
-//
