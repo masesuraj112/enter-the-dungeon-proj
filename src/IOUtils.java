@@ -4,8 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
-/**
- * A utility class that provides methods to read and write files.
+/** A utility class that provides methods to read and write files.
  */
 public class IOUtils {
     /***
@@ -23,8 +22,7 @@ public class IOUtils {
         }
         return appProps;
     }
-    /***
-     * Reads a string which returns a single coordinate
+    /** Reads a string which returns a single coordinate
      * @param coords inputs the string of the coordinates which
      *               from app.properties file
      * @return Point returns the coordinate in Point form
@@ -33,8 +31,7 @@ public class IOUtils {
         String[] coordinates = coords.split(",");
         return new Point(Double.parseDouble(coordinates[0]), Double.parseDouble(coordinates[1]));
     }
-    /***
-     * Reads a string which returns multiple coordinates
+    /** Reads a string which returns multiple coordinates
      * @param coords inputs the string of the coordinates which
      *               from app.properties file
      * @return ArrayList<Point> returns an Arraylist of coordinates in Point form

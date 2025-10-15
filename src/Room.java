@@ -319,7 +319,6 @@ class BattleRoom extends Room {
 
     }
 
-        // Add here
 
 
         public void update(Input input) {

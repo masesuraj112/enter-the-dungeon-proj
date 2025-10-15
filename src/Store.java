@@ -33,9 +33,6 @@ public class Store {
 
 
 
-    public static void changePlayerStats(Player player) {
-
-    }
 
 
 }
