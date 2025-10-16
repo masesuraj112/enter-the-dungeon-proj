@@ -34,9 +34,7 @@ public class Bullet {
      * same direction that the mouse points to if it is active
      */
     public void update() {
-//        position = position.add(direction.mul(SPEED));
         position = position.add(direction.mul(Double.parseDouble(ShadowDungeon.gameProps.getProperty("bulletSpeed"))));
-
         if (this.isPresent) {
             draw();
         }
@@ -74,8 +72,4 @@ public class Bullet {
     public Point getDrawPosition() {
         return position.asPoint();
     }
-
-
-    
-
 }

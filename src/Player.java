@@ -19,12 +19,8 @@ public class Player {
     private boolean faceLeft = false;
     private static final Image RIGHT_IMAGE = new Image("res/player_right.png");
     private static final Image LEFT_IMAGE = new Image("res/player_left.png");
-    private static final int NUM_COINS = 50;
     private static final int STANDARD = 0;
     private static final int ADVANCED = 1;
-
-
-
     /** Player constructor with only one parameter
      * @param position initialises player with a specific coordinate
      */
@@ -96,16 +92,16 @@ public class Player {
         }
         // store purchasing logic
         if (isStoreOpen) {
-            if (getCoins() >= NUM_COINS) {
+            if (getCoins() >= Double.parseDouble(ShadowDungeon.gameProps.getProperty("healthPurchase"))) {
                 // health purchase
                 if (input.wasPressed(Keys.E)) {
-                    health += NUM_COINS;
-                    coins -= NUM_COINS;
+                    health += Double.parseDouble(ShadowDungeon.gameProps.getProperty("healthBonus"));
+                    coins -= Double.parseDouble(ShadowDungeon.gameProps.getProperty("healthPurchase"));
                 }
                 // weapons purchase
-                if (input.wasPressed(Keys.L) && weapon <= 1 && getCoins() >= NUM_COINS) {
+                if (input.wasPressed(Keys.L) && weapon <= 1 && getCoins() >= Double.parseDouble(ShadowDungeon.gameProps.getProperty("weaponPurchase"))) {
                     weapon += 1;
-                    coins -= NUM_COINS;
+                    coins -= Double.parseDouble(ShadowDungeon.gameProps.getProperty("weaponPurchase"));
                 }
             }
         }

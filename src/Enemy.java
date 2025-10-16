@@ -111,7 +111,6 @@ class NewKeyBulletKin extends Enemy {
     private ArrayList<Point> PointsArrayList;
     private int currentTarget;
     private Key newKey;
-    private static double PLAYER_HEALTH_LOSS = 0.2;
     /** This is the constructor of the NewKeyBulletKin class
      * @param points inputs an array of points where the NewKeyBulletKin class
      *               travels in a loop

@@ -56,5 +56,4 @@ public class Wall {
     public boolean hasCollidedWithFireball(Fireball fireball) {
         return image.getBoundingBoxAt(position).intersects(fireball.getFireballImage().getBoundingBoxAt(fireball.getDrawPosition()));
     }
-
 }

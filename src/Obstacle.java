@@ -1,6 +1,6 @@
 import bagel.*;
 import bagel.util.Point;
-/** This describes an Obstacle superclass
+/** This describes an Obstacle superclass which are types of objects that a player cannot pass through
  */
 public class Obstacle {
     private Image obstacleImage;
@@ -85,7 +85,6 @@ class Table extends Obstacle {
  * A table class is a subclass of Obstacle
  */
 class Basket extends Obstacle {
-    private static final int EARN_COINS = 20;
     /** This is a constructor of the Basket class
      * @param point inputs the coordinates of the obstacle
      */
@@ -108,7 +107,7 @@ class Basket extends Obstacle {
             if (isActive() && bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()).intersects(getObstacleImage().getBoundingBoxAt(getCurrentPosition()))) {
                 setActive(false);
                 // If a player shoots at the Basket, the player earns 20 coins
-                player.earnCoins(EARN_COINS);
+                player.earnCoins(Integer.parseInt(ShadowDungeon.gameProps.getProperty("basketCoin")));
             }
         }
     }

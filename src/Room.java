@@ -1,7 +1,6 @@
 import bagel.Input;
 import bagel.Keys;
 import bagel.util.Point;
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Properties;
@@ -255,8 +254,6 @@ class BattleRoom extends Room {
     private boolean isComplete = false;
     private final String nextRoomName;
     private final String roomName;
-    private static final int EXTRA = 5;
-
     /** This is a BattleRoom constructor
      * @param roomName inputs the specific BattleRoom name
      * @param nextRoomName inputs the next Room after a specific BattleRoom
@@ -363,7 +360,7 @@ class BattleRoom extends Room {
                 if (bulletKinArrayList.get(i).isDead() && bulletKinArrayList.get(i).isActive()) {
                     // robot earns a little extra when it kills a bulletKin
                     if (ShadowDungeon.chosenCharacter.equals("robot")) {
-                       getPlayer().earnCoins(Integer.parseInt(ShadowDungeon.gameProps.getProperty("bulletKinCoin")) + EXTRA);
+                       getPlayer().earnCoins(Integer.parseInt(ShadowDungeon.gameProps.getProperty("bulletKinCoin")) + Integer.parseInt(ShadowDungeon.gameProps.getProperty("robotExtraCoin")));
                     } else if (ShadowDungeon.chosenCharacter.equals("marine")) {
                         getPlayer().earnCoins(Integer.parseInt(ShadowDungeon.gameProps.getProperty("bulletKinCoin")));
                     }
@@ -376,7 +373,7 @@ class BattleRoom extends Room {
                 if (ashenBulletKinArrayList.get(i).isDead() && ashenBulletKinArrayList.get(i).isActive()) {
                     // robot earns a little extra when it kills an ashenBulletKin
                     if (ShadowDungeon.chosenCharacter.equals("robot")) {
-                        getPlayer().earnCoins(Integer.parseInt(ShadowDungeon.gameProps.getProperty("ashenBulletKinCoin")) + EXTRA);
+                        getPlayer().earnCoins(Integer.parseInt(ShadowDungeon.gameProps.getProperty("ashenBulletKinCoin")) + Integer.parseInt(ShadowDungeon.gameProps.getProperty("robotExtraCoin")));
                     } else if (ShadowDungeon.chosenCharacter.equals("marine")) {
                         getPlayer().earnCoins(Integer.parseInt(ShadowDungeon.gameProps.getProperty("ashenBulletKinCoin")));
                     }
