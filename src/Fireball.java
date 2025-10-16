@@ -38,6 +38,7 @@ public class Fireball {
         if (isPresent && fireballImage.getBoundingBoxAt(position.asPoint()).intersects(player.getCurrImage().getBoundingBoxAt(player.getPosition()))) {
             // player receives damage if it comes in contact with the fireball
             player.receiveDamage(Double.parseDouble(ShadowDungeon.gameProps.getProperty("fireballDamage")));
+            isPresent = false;
         }
     }
     /** This is a setter method for the present attribute
