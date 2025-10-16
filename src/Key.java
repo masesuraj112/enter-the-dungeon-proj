@@ -8,7 +8,6 @@ public class Key {
     private final Image keyImage = new Image("res/key.png");
     private Point keyPosition;
     private boolean isSelected;
-    private final static int INCREASE = 1;
     /** Constructor of Key
      */
     public Key() {
@@ -34,10 +33,9 @@ public class Key {
             keyImage.draw(this.keyPosition.x, this.keyPosition.y);
             // if a player touches the key, increase key count by 1
             if (keyImage.getBoundingBoxAt(keyPosition).intersects(player.getCurrImage().getBoundingBoxAt(player.getPosition()))) {
-                player.setKeys(player.getKeys() + INCREASE);
+                player.setKeys(player.getKeys() + 1);
                 setSelected(true);
             }
-
         }
     }
 }

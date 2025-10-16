@@ -6,7 +6,6 @@ public class Obstacle {
     private Image obstacleImage;
     private Point currentPosition;
     private boolean isActive;
-
     /** This is an obstacle constructor
      * @param point inputs the point where the obstacle will be rendered
      */
@@ -50,7 +49,6 @@ public class Obstacle {
         if (isActive()) {
             getObstacleImage().draw(getCurrentPosition().x, getCurrentPosition().y);
         }
-
     }
     /** This checks if a bullet has shot at the obstacle
      * @param player inputs the specific player
@@ -63,11 +61,11 @@ public class Obstacle {
         // checking if bullet has made contact with the obstacle
         for (Bullet bullet: player.getBulletArrayList()) {
             if (isActive() && bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()).intersects(getObstacleImage().getBoundingBoxAt(getCurrentPosition()))) {
+                // this kills the enemy
                 setActive(false);
             }
         }
     }
-
 }
 /** This describes a Table Class
  * A table class is a subclass of Obstacle
@@ -92,10 +90,9 @@ class Basket extends Obstacle {
         super(point);
         setObstacleImage(new Image("res/basket.png"));
     }
-
     /** This is an overridden method of collideWithPlayer(Player player)
-     * It contains extra functionality including the fact that when a Basket
-     * is eliminated, a player gains more
+     * It contains extra functionality including the fact that when a basket
+     * is eliminated, a player gains more coins
      */
     @Override
     public void collideWithPlayer(Player player) {
@@ -110,5 +107,62 @@ class Basket extends Obstacle {
                 player.earnCoins(Integer.parseInt(ShadowDungeon.gameProps.getProperty("basketCoin")));
             }
         }
+    }
+}
+/** This represents a wall which inherits from the obstacle
+ * superclass and is present in one of the BattleRooms
+ */
+class Wall extends Obstacle {
+    /** This is a Wall Constructor
+     * @param position inputs the coordinates of an individual wall unit
+     */
+    public Wall(Point position) {
+        super(position);
+        setObstacleImage(new Image("res/wall.png"));
+    }
+    /** This is an overridden method of collideWithPlayer(Player player)
+     * Unlike other obstacles, when a bullet comes into contact, the wall units
+     * do not disappear
+     * @param player inputs a player
+     */
+    @Override
+    public void collideWithPlayer(Player player) {
+        if (hasCollidedWith(player)) {
+            // set the player to its position prior to attempting to move through this wall
+            player.move(player.getPrevPosition().x, player.getPrevPosition().y);
+        }
+        if (player.getBulletArrayList().size() > 0) {
+            for (Bullet bullet: player.getBulletArrayList()) {
+                if (hasCollidedWithBullet(bullet)) {
+                    bullet.setPresent(false);
+                }
+            }
+        }
+    }
+    /** This method draws the wall
+     */
+    public void draw() {
+        getObstacleImage().draw(getCurrentPosition().x, getCurrentPosition().y);
+    }
+    /** This method checks if a player has collided with a wall
+     * @param player inputs a player
+     * @return boolean returns true or false if a player is in contact with a wall
+     */
+    public boolean hasCollidedWith(Player player) {
+        return getObstacleImage().getBoundingBoxAt(getCurrentPosition()).intersects(player.getCurrImage().getBoundingBoxAt(player.getPosition()));
+    }
+    /** This method checks if a player has collided with a bullet
+     * @param bullet inputs a bullet
+     * @return boolean returns true or false if a bullet is in contact with a wall
+     */
+    public boolean hasCollidedWithBullet(Bullet bullet) {
+        return getObstacleImage().getBoundingBoxAt(getCurrentPosition()).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()));
+    }
+    /** This method checks if a player has collided with a fireball
+     * @param fireball inputs a fireball
+     * @return boolean returns true or false if a fireball is in contact with a wall
+     */
+    public boolean hasCollidedWithFireball(Fireball fireball) {
+        return getObstacleImage().getBoundingBoxAt(getCurrentPosition()).intersects(fireball.getFireballImage().getBoundingBoxAt(fireball.getDrawPosition()));
     }
 }

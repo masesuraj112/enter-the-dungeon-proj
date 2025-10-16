@@ -381,7 +381,7 @@ class BattleRoom extends Room {
                 }
             }
             for (Wall wall: walls) {
-                wall.update(getPlayer());
+                wall.collideWithPlayer(getPlayer());
                 wall.draw();
                 for (int i = 0; i < bulletKinArrayList.size(); i ++) {
                     bulletKinArrayList.get(i).collideWithWall(wall);
