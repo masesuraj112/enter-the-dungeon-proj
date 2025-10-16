@@ -10,7 +10,6 @@ public class Bullet {
     private Vector2 position;
     private Vector2 direction;
     private boolean isPresent;
-    private static final double SPEED = -0.5;
     /** This is the constructor of a Bullet
      * @param position This specifies the exact coordinates of where the bullet should be released from
      * @param input This passes through an input parameter which is helpful
@@ -36,7 +35,7 @@ public class Bullet {
      */
     public void update() {
 //        position = position.add(direction.mul(SPEED));
-        position = position.add(direction.mul(SPEED + Double.parseDouble(ShadowDungeon.gameProps.getProperty("fireballDamage"))));
+        position = position.add(direction.mul(Double.parseDouble(ShadowDungeon.gameProps.getProperty("bulletSpeed"))));
 
         if (this.isPresent) {
             draw();

@@ -111,7 +111,6 @@ class NewKeyBulletKin extends Enemy {
     private ArrayList<Point> PointsArrayList;
     private int currentTarget;
     private Key newKey;
-    private static int SPEED = 4;
     private static double PLAYER_HEALTH_LOSS = 0.2;
     /** This is the constructor of the NewKeyBulletKin class
      * @param points inputs an array of points where the NewKeyBulletKin class
@@ -151,24 +150,25 @@ class NewKeyBulletKin extends Enemy {
                     currentTarget += 1;
                 }
             } else {
-                setPosition(current.add(direction.normalised().mul(SPEED)).asPoint());
+                setPosition(current.add(direction.normalised().mul(Double.parseDouble(ShadowDungeon.gameProps.getProperty("keyBulletKinSpeed")))).asPoint());
             }
             draw();
         }
         // if a player has collided with KeyBulletKin
         if (hasCollidedWith(player) && !isDead()) {
-            player.setHealth(player.getHealth() - PLAYER_HEALTH_LOSS);
+            player.setHealth(player.getHealth() - Double.parseDouble(ShadowDungeon.gameProps.getProperty("riverDamagePerFrame")));
         }
         // If a bullet is in contact with the enemy
         if (player.getBulletArrayList().size() > 0) {
             for (Bullet bullet: player.getBulletArrayList()) {
-                if (collidedWithBullet(bullet)) {
+                if (bullet.isPresent() && collidedWithBullet(bullet)) {
                     setHealth(getHealth() - player.giveDamage());
+                    bullet.setPresent(false);
                 }
             }
         }
         // when the enemy is killed
-        if (getHealth() < 0 && isActive()) {
+        if (getHealth() <= 0 && isActive()) {
             setDead(true);
             newKey.setKeyPosition(getPosition());
             // drop a key
@@ -269,7 +269,7 @@ class BulletKin extends BulletKinType implements Weapon {
             draw();
         }
         // if the enemy is dead
-        if (getHealth() < 0 && isActive()) {
+        if (getHealth() <= 0 && isActive()) {
             setDead(true);
         }
         // if a fireball interacts with a player
@@ -281,8 +281,9 @@ class BulletKin extends BulletKinType implements Weapon {
         // If a bullet interacts with the enemy
         if (player.getBulletArrayList().size() > 0) {
             for (Bullet bullet: player.getBulletArrayList()) {
-                if (getEnemyImage().getBoundingBoxAt(getPosition()).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()))) {
+                if (bullet.isPresent() && getEnemyImage().getBoundingBoxAt(getPosition()).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()))) {
                     setHealth(getHealth() - player.giveDamage());
+                    bullet.setPresent(false);
                 }
             }
         }
@@ -322,7 +323,7 @@ class AshenBulletKin extends BulletKinType implements Weapon {
 
         }
         // if the enemy is dead
-        if (getHealth() < 0 && isActive()) {
+        if (getHealth() <= 0 && isActive()) {
             setDead(true);
         }
         // if a fireball interacts with a player
@@ -334,8 +335,9 @@ class AshenBulletKin extends BulletKinType implements Weapon {
         // If a bullet interacts with the enemy
         if (player.getBulletArrayList().size() > 0) {
             for (Bullet bullet: player.getBulletArrayList()) {
-                if (getEnemyImage().getBoundingBoxAt(getPosition()).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()))) {
+                if (bullet.isPresent() && getEnemyImage().getBoundingBoxAt(getPosition()).intersects(bullet.getBulletImage().getBoundingBoxAt(bullet.getDrawPosition()))) {
                     setHealth(getHealth() - player.giveDamage());
+                    bullet.setPresent(false);
                 }
             }
         }
