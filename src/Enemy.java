@@ -3,7 +3,7 @@ import bagel.util.Point;
 import java.util.ArrayList;
 import bagel.util.Vector2;
 /** This represents the Enemy abstract superclass
- * which is responsible for engaging with the player
+ * which is responsible for trying to kill the player
  */
 abstract public class Enemy {
     private double health;
@@ -129,7 +129,7 @@ class NewKeyBulletKin extends Enemy {
         setStoreOpen(false);
     }
     /** This is the implementation of the abstract update method
-     * Tt handles interactions with a player including when it
+     * It handles interactions with a player including when it
      * comes into contact and its constant movement
      * @param player inputs a player to account for its interactions
      */
@@ -210,7 +210,7 @@ abstract class BulletKinType extends Enemy implements Weapon {
     /** This represents a method that checks if the fireballs of the enemies
      * are in contact with closedDoors of all doors in BattleRoom
      * @param primaryDoor inputs the primaryDoor of a BattleRoom to check for collisions
-     * @param secondaryDoor inputs the secondaryDoor of a BattleRoom to check for colllisions
+     * @param secondaryDoor inputs the secondaryDoor of a BattleRoom to check for collisions
      * @param fireBallArrayList inputs the fireBallArrayList of an enemy
      */
     public void fireballDoorCollision (Door primaryDoor, Door secondaryDoor, ArrayList<Fireball> fireBallArrayList) {
@@ -239,7 +239,7 @@ abstract class BulletKinType extends Enemy implements Weapon {
 }
 /** This represents the BulletKin class
  * This inherits from the BulletKinType class
- * It also implements the Weapon interface
+ * It also implements the Weapon interface and shoots fireballs
  */
 class BulletKin extends BulletKinType implements Weapon {
     /** This represents the constructor of the BulletKin class
@@ -286,12 +286,11 @@ class BulletKin extends BulletKinType implements Weapon {
                 }
             }
         }
-
     }
 }
 /** This represents the AshenBulletKin class
  * This inherits from the BulletKinType class
- * It also implements the Weapon interface
+ * It also implements the Weapon interface and shoots fireballs
  */
 class AshenBulletKin extends BulletKinType implements Weapon {
     /** This represents the constructor of the AshenBulletKin class
@@ -340,6 +339,5 @@ class AshenBulletKin extends BulletKinType implements Weapon {
                 }
             }
         }
-
     }
 }

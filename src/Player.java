@@ -280,14 +280,13 @@ public class Player {
     public boolean isStoreOpen() {
         return isStoreOpen;
     }
-    /** This is a setterr method of the isStoreOpen attribute
+    /** This is a setter method of the isStoreOpen attribute
      * @param storeOpen inputs if the store is open or not
      */
     public void setStoreOpen(boolean storeOpen) {
         isStoreOpen = storeOpen;
     }
 }
-
 /** Robot class which inherits from player
  */
 class Robot extends Player {

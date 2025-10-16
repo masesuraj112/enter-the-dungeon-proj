@@ -26,7 +26,7 @@ public class Key {
     public void setKeyPosition(Point position) {
         this.keyPosition = position;
     }
-    /** This is a upadate method handling interactions between player and key
+    /** This is a update method handling interactions between player and key
      * @param player inputs the player
      */
     public void update(Player player) {
@@ -39,10 +39,5 @@ public class Key {
             }
 
         }
-
-
-
-
     }
-
 }

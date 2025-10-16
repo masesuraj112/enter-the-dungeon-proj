@@ -7,10 +7,9 @@ import java.util.Properties;
 /** A utility class that provides methods to read and write files.
  */
 public class IOUtils {
-    /***
-     * Read a properties file and return a Properties object
+    /** Read a properties file and return a Properties object
      * @param configFile: the path to the properties file
-     * @return: Properties object
+     * @return Properties object
      */
     public static Properties readPropertiesFile(String configFile) {
         Properties appProps = new Properties();

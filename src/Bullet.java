@@ -12,7 +12,6 @@ public class Bullet {
     private boolean isPresent;
     private static final int SPEED = 5;
     /** This is the constructor of a Bullet
-     * When a player shoots a bullet the class handles its movement and collision logic
      * @param position This specifies the exact coordinates of where the bullet should be released from
      * @param input This passes through an input parameter which is helpful
      *             for providing the starting coordinates of the bullet as well as
@@ -33,7 +32,7 @@ public class Bullet {
         return isPresent;
     }
     /** This method ensures that a bullet travels constantly in
-     * same direction that the mouse points if it is active
+     * same direction that the mouse points to if it is active
      */
     public void update() {
         position = position.add(direction.mul(SPEED));

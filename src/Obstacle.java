@@ -1,6 +1,6 @@
 import bagel.*;
 import bagel.util.Point;
-/** This describes an Obstacle superclass class
+/** This describes an Obstacle superclass
  */
 public class Obstacle {
     private Image obstacleImage;
@@ -81,9 +81,8 @@ class Table extends Obstacle {
         setObstacleImage(new Image("res/table.png"));
     }
 }
-
 /** This describes a Basket Class
- * A table class is a subclass of Baskets
+ * A table class is a subclass of Obstacle
  */
 class Basket extends Obstacle {
     private static final int EARN_COINS = 20;
@@ -93,10 +92,9 @@ class Basket extends Obstacle {
     public Basket(Point point) {
         super(point);
         setObstacleImage(new Image("res/basket.png"));
-
     }
 
-    /** This is an overriden method of collideWithPlayer(Player player)
+    /** This is an overridden method of collideWithPlayer(Player player)
      * It contains extra functionality including the fact that when a Basket
      * is eliminated, a player gains more
      */
