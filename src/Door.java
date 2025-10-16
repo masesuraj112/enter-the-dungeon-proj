@@ -72,7 +72,7 @@ public class Door {
     private void onCollideWith(Player player) {
         // when the player only just entered this door's room, overlapping with the unlocked door shouldn't trigger room transition
         if (unlocked && !justEntered) {
-            // clears bullets when entering a new room 
+            // clears bullets when entering a new room
             for (Bullet bullet: player.getBulletArrayList()) {
                 bullet.setPresent(false);
             }
