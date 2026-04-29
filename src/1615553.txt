@@ -1,0 +1,37 @@
+88e9bb2 - masesuraj112, 39 minutes ago : final commit
+b501202 - masesuraj112, 49 minutes ago : Added logic where bullets clear when a player enters a new room
+75c5813 - masesuraj112, 54 minutes ago : Refactored Wall class
+5d48359 - masesuraj112, 3 hours ago : Fixed magic numbers
+81302c8 - masesuraj112, 3 hours ago : Fixed enemies' health loss logic when being hit with a bullet
+e993142 - masesuraj112, 4 hours ago : Fixed player health loss logic when being hit with a fireball
+870b2c5 - masesuraj112, 4 hours ago : Added rest of javadoc comments
+bedf826 - masesuraj112, 22 hours ago : Added javadoc and comments to all obstacle and player classes
+36e871b - masesuraj112, 26 hours ago : Added javadoc and comments to all enemy classes, fireball and IOUtils classes
+d5da9f1 - masesuraj112, 27 hours ago : Added JavaDoc comments for Bullet and Door class
+d67a29b - masesuraj112, 28 hours ago : Deleted old Room classes that were in separate files
+e6e5369 - masesuraj112, 2 days ago : Refactored all of the Room Classes by creating a Room superclass
+97f7dcc - masesuraj112, 2 days ago : Added Weapon Interface
+e353eb5 - masesuraj112, 3 days ago : Added pause logic for enemies during access of store
+3ca22b0 - masesuraj112, 3 days ago : Implemented restart logic in store
+1fd8db6 - masesuraj112, 3 days ago : Fixed killing of KeyBulletKin logic
+aa27cb9 - masesuraj112, 3 days ago : Added weapon and health upgrading logic
+78c2cdd - masesuraj112, 3 days ago : Created Stored Class
+13fac7f - masesuraj112, 5 days ago : Fixed marine and river interaction logic
+46a4eb4 - masesuraj112, 5 days ago : Refactored Enemy subclass structure
+80facb8 - masesuraj112, 5 days ago : Updated table class
+893ad12 - masesuraj112, 6 days ago : Implemented collision logic between player and table
+46ee106 - masesuraj112, 8 days ago : Fixed closed-door and fireball collision logic and added Obstacle superclass
+917bd4f - masesuraj112, 9 days ago : Deleted original KeyBulletKin class from project 1 (milestone)
+43c7646 - masesuraj112, 9 days ago : Added AshenBulletKin class
+f7d112f - masesuraj112, 9 days ago : Fixed fireball-wall logic
+9af93dd - masesuraj112, 10 days ago : Added player-bulletKin killing logic
+40be7ac - masesuraj112, 10 days ago : Added bullet-wall collision logic
+b154ab6 - masesuraj112, 10 days ago : Added BulletKin class and shooting logic
+79af893 - masesuraj112, 11 days ago : implemented rest of KeyBulletKin logic
+f73d0e9 - masesuraj112, 12 days ago : implemented KeyBulletKin movement
+d361da6 - masesuraj112, 13 days ago : Refactored ShadowDungeon and prepRoom and fixed bullet shooting logic
+543cc1e - masesuraj112, 13 days ago : Added player shooting logic for prepRoom
+524f61e - masesuraj112, 2 weeks ago : Implemented logic to change characters in PrepRoom
+2460bae - masesuraj112, 2 weeks ago : Updated layout on prepRoom
+c788958 - masesuraj112, 2 weeks ago : Updates /res files
+6a94f76 - masesuraj112, 2 weeks ago : Initial commit
